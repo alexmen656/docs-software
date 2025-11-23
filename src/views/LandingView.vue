@@ -59,6 +59,7 @@ const formatDate = (date: Date) => {
         <div
           v-for="doc in sortedDocs"
           :key="doc.id"
+          @click="$router.push({ name: 'detail', params: { id: doc.id } })"
           class="group cursor-pointer rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-gray-400 dark:hover:border-gray-600 transition-all hover:shadow-lg dark:hover:shadow-lg"
         >
           <div class="relative h-48 overflow-hidden bg-gray-200 dark:bg-gray-800">
