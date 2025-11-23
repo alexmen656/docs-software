@@ -43,9 +43,9 @@ const navigateToDoc = (docId: string) => {
 
 <template>
     <div class="min-h-screen bg-gray-50 dark:bg-slate-900">
-        <div class="bg-white dark:bg-slate-800 border-b border-gray-200 dark:border-gray-700">
-            <div class="max-w-7xl mx-auto px-8 py-16">
-                <h1 class="text-5xl font-bold text-gray-900 dark:text-white mb-8">Knowledge Hub</h1>
+        <div class="bg-white dark:bg-slate-800 border-b border-gray-200 dark:border-gray-700 image-sec">
+            <div class="max-w-7xl mx-auto px-8 py-24">
+                <h1 class="text-5xl font-bold text-gray-900 text-white dark:text-white mb-8">Knowledge Hub</h1>
                 <div class="relative">
                     <div class="relative">
                         <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none"
@@ -83,7 +83,8 @@ const navigateToDoc = (docId: string) => {
                             @click="navigateToProduct(product.slug)"
                             class="cursor-pointer rounded-lg transition-all shadow-sm hover:shadow-md p-6 bg-white dark:bg-slate-800">
                             <div class="flex items-center gap-3 mb-4">
-                                <img height="36" width="36" :src="product.logo" :alt="'Logo of ' + product.name" class="flex-shrink-0"/>
+                                <img height="36" width="36" :src="product.logo" :alt="'Logo of ' + product.name"
+                                    class="flex-shrink-0" />
                                 <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
                                     {{ product.name }}
                                 </h3>
@@ -93,7 +94,10 @@ const navigateToDoc = (docId: string) => {
                             </p>
                             <div class="border-t border-gray-200 dark:border-gray-700 pt-4">
                                 <p class="text-sm text-gray-500 dark:text-gray-400">
-                                    {{demoDocuments.filter(d => d.productId === product.id).length}} Articles · {{demoDocuments.filter(d => d.productId === product.id).length > 0 ? Math.ceil(demoDocuments.filter(d => d.productId === product.id).length / 3) : 0}} Sections
+                                    {{demoDocuments.filter(d => d.productId === product.id).length}} Articles ·
+                                    {{demoDocuments.filter(d => d.productId === product.id).length > 0 ?
+                                        Math.ceil(demoDocuments.filter(d => d.productId === product.id).length / 3) : 0}}
+                                    Sections
                                 </p>
                             </div>
                         </div>
@@ -106,17 +110,22 @@ const navigateToDoc = (docId: string) => {
                     <div v-for="product in productList" :key="product.id" @click="navigateToProduct(product.slug)"
                         class="cursor-pointer rounded-lg transition-all shadow-sm hover:shadow-md p-6 bg-white dark:bg-slate-800">
                         <div class="flex items-center gap-3 mb-4">
-                            <img height="42" width="42" :src="product.logo" :alt="'Logo of ' + product.name" class="flex-shrink-0"/>
+                            <img height="42" width="42" :src="product.logo" :alt="'Logo of ' + product.name"
+                                class="flex-shrink-0" />
                             <h3 class="text-2xl font-semibold text-gray-900 dark:text-white">
                                 {{ product.name }}
                             </h3>
                         </div>
                         <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 break-words">
-                            {{ product.description }} lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                            {{ product.description }} lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                            eiusmod tempor incididunt ut labore et dolore magna aliqua.
                         </p>
                         <div class="border-t border-gray-200 dark:border-gray-700 pt-4">
                             <p class="text-sm text-gray-500 dark:text-gray-400">
-                                {{demoDocuments.filter(d => d.productId === product.id).length}} Articles · {{demoDocuments.filter(d => d.productId === product.id).length > 0 ? Math.ceil(demoDocuments.filter(d => d.productId === product.id).length / 3) : 0}} Sections
+                                {{demoDocuments.filter(d => d.productId === product.id).length}} Articles ·
+                                {{demoDocuments.filter(d => d.productId === product.id).length > 0 ?
+                                    Math.ceil(demoDocuments.filter(d => d.productId === product.id).length / 3) : 0}}
+                                Sections
                             </p>
                         </div>
                     </div>
@@ -133,5 +142,13 @@ const navigateToDoc = (docId: string) => {
     line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+}
+
+.image-sec {
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url('https://www.aglo.sk/assets/default/img/main-slide.jpg');
+    background-size: cover;
+    background-position: center;
 }
 </style>
