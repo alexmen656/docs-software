@@ -6,9 +6,9 @@ import AppSidebar from './components/AppSidebar.vue'
 
 const route = useRoute()
 
-const showHeader = computed(() => {
+/*const showHeader = computed(() => {
   return !['landing', 'login', 'signup'].includes(route.name as string)
-})
+})*/
 
 const showSidebar = computed(() => {
   return !['landing', 'login', 'signup'].includes(route.name as string)
@@ -17,10 +17,13 @@ const showSidebar = computed(() => {
 
 <template>
   <div id="app" class="min-h-screen" :class="showSidebar ? 'app-with-sidebar' : 'bg-gray-50 dark:bg-gray-900'">
-    <AppHeader v-if="showHeader" />
+    <AppHeader /><!--v-if="showHeader" -->
     <div class="flex h-full">
       <AppSidebar v-if="showSidebar" />
-      <main :class="showSidebar ? 'ml-64 w-full main-content' : 'w-full'">
+      <!--  <main :class="showSidebar ? 'ml-64 w-full main-content' : 'w-full'">
+      <main class="ml-64 w-full main-content">-->
+
+      <main :class="showSidebar ? 'ml-64 w-full main-content' : 'w-full p60'">
         <RouterView /><!--pt-15-->
       </main>
     </div>
@@ -51,5 +54,9 @@ const showSidebar = computed(() => {
   .main-content {
     background: #1e293b;
   }
+}
+
+.p60 {
+  padding-top: 60px;
 }
 </style>
