@@ -147,7 +147,7 @@ const navigateToDoc = (docId: string) => {
 .image-sec {
     background-image:
         linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-        url('https://www.aglo.sk/assets/default/img/main-slide.jpg');
+        url('/bg-image2.jpeg');
     background-size: cover;
     background-position: center;
 }

@@ -1,6 +1,6 @@
 <template>
     <header class="bg-white dark:bg-gray-800 fixed top-0 left-0 right-0 z-50">
-        <div class="mx-auto px-3 sm:px-3 2xl:px-3">
+        <div class="mx-auto px-4 sm:px-3 2xl:px-3"><!--px-3-->
             <div class="flex justify-between items-center h-15">
                 <div class="flex items-center">
                     <div class="flex-shrink-0 flex items-center logo-container"
@@ -8,7 +8,9 @@
                         <img class="logo-image" src="../assets/logo-syscom.svg" alt="Logo">
                     </div>
                 </div>
-                <div class="hidden md:flex flex-1 max-w-2xl mx-8">
+                <!--{{ route === 'landing' }}-->
+                <div v-if="showSearch" class="hidden md:flex flex-1 max-w-2xl mx-8">
+                    <!--!(route == 'landing' || route == '')-->
                     <div class="relative w-full search-container">
                         <svg class="absolute left-3 top-2.5 w-5 h-5 text-gray-400 dark:text-gray-500"
                             viewBox="0 0 20 20" fill="currentColor"><!--pt-1-->
@@ -78,9 +80,13 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 
 const router = useRouter()
+//const route = useRoute()
+//console.log(route.name)
+
+const showSearch = window.location.pathname !== '/' && window.location.pathname !== '/landing'
 </script>
 
 <style scoped>
