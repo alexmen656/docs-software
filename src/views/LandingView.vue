@@ -81,16 +81,21 @@ const navigateToDoc = (docId: string) => {
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         <div v-for="product in filteredProducts" :key="product.id"
                             @click="navigateToProduct(product.slug)"
-                            class="group cursor-pointer rounded-lg border border-gray-200 dark:border-gray-700 hover:border-gray-400 dark:hover:border-gray-600 transition-all hover:shadow-lg p-8 text-center bg-white dark:bg-slate-800 hover:bg-gray-50 dark:hover:bg-slate-700">
-                            <div class="text-6xl mb-4 group-hover:scale-110 transition-transform">{{ product.icon }}
+                            class="cursor-pointer rounded-lg transition-all shadow-sm hover:shadow-md p-6 bg-white dark:bg-slate-800">
+                            <div class="flex items-center gap-3 mb-4">
+                                <img height="36" width="36" :src="product.logo" :alt="'Logo of ' + product.name" class="flex-shrink-0"/>
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                                    {{ product.name }}
+                                </h3>
                             </div>
-                            <h3
-                                class="text-lg font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                                {{ product.name }}
-                            </h3>
-                            <p class="text-sm text-gray-600 dark:text-gray-400">
+                            <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 break-words">
                                 {{ product.description }}
                             </p>
+                            <div class="border-t border-gray-200 dark:border-gray-700 pt-4">
+                                <p class="text-sm text-gray-500 dark:text-gray-400">
+                                    {{demoDocuments.filter(d => d.productId === product.id).length}} Articles · {{demoDocuments.filter(d => d.productId === product.id).length > 0 ? Math.ceil(demoDocuments.filter(d => d.productId === product.id).length / 3) : 0}} Sections
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -99,18 +104,21 @@ const navigateToDoc = (docId: string) => {
                 <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Produkte</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <div v-for="product in productList" :key="product.id" @click="navigateToProduct(product.slug)"
-                        class="group cursor-pointer rounded-lg border border-gray-200 dark:border-gray-700 hover:border-gray-400 dark:hover:border-gray-600 transition-all hover:shadow-lg p-8 text-center bg-white dark:bg-slate-800 hover:bg-gray-50 dark:hover:bg-slate-700">
-                        <div class="text-6xl mb-4 group-hover:scale-110 transition-transform"><!--{{ product.icon }}--> <img height="48" width="48" src="@/assets/logo.png" alt=""></div>
-                        <h3
-                            class="text-lg font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
-                            {{ product.name }}
-                        </h3>
-                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4">
-                            {{ product.description }}
+                        class="cursor-pointer rounded-lg transition-all shadow-sm hover:shadow-md p-6 bg-white dark:bg-slate-800">
+                        <div class="flex items-center gap-3 mb-4">
+                            <img height="42" width="42" :src="product.logo" :alt="'Logo of ' + product.name" class="flex-shrink-0"/>
+                            <h3 class="text-2xl font-semibold text-gray-900 dark:text-white">
+                                {{ product.name }}
+                            </h3>
+                        </div>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 break-words">
+                            {{ product.description }} lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                         </p>
-                        <p class="text-xs text-gray-500 dark:text-gray-400">
-                            {{demoDocuments.filter(d => d.productId === product.id).length}} Articles
-                        </p>
+                        <div class="border-t border-gray-200 dark:border-gray-700 pt-4">
+                            <p class="text-sm text-gray-500 dark:text-gray-400">
+                                {{demoDocuments.filter(d => d.productId === product.id).length}} Articles · {{demoDocuments.filter(d => d.productId === product.id).length > 0 ? Math.ceil(demoDocuments.filter(d => d.productId === product.id).length / 3) : 0}} Sections
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>

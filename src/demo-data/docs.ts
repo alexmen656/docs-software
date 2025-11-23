@@ -5,48 +5,47 @@ export const products: Product[] = [
     id: 'shop',
     name: 'Shop Management',
     description: 'Verwaltung eines Online-Shops',
-    icon: '🛒',
-    slug: 'shop'
+    logo: '/logo.png',
+    slug: 'shop',
   },
   {
     id: 'website',
     name: 'Website Management',
     description: 'Verwaltung einer Website',
-    icon: '🌐',
-    slug: 'website'
+    logo: '/logo.png',
+    slug: 'website',
   },
   {
     id: 'representative',
     name: 'Digitale Vertretung',
     description: 'Digitálne zastupiteľstvo',
-    icon: '👤',
-    slug: 'representative'
+    logo: '/logo.png',
+    slug: 'representative',
   },
   {
     id: 'publishing',
     name: 'Veröffentlichung',
     description: 'Zverejňovanie',
-    icon: '📄',
-    slug: 'publishing'
+    logo: '/logo.png',
+    slug: 'publishing',
   },
   {
     id: 'analytics',
     name: 'Analytik & Berichte',
     description: 'Analytics and Reporting',
-    icon: '📊',
-    slug: 'analytics'
+    logo: '/logo.png',
+    slug: 'analytics',
   },
   {
     id: 'security',
     name: 'Sicherheit',
     description: 'Security & Compliance',
-    icon: '🔐',
-    slug: 'security'
-  }
+    logo: '/logo.png',
+    slug: 'security',
+  },
 ]
 
 export const demoDocuments: Doc[] = [
-  // Shop Management Docs
   {
     id: 'shop-1',
     productId: 'shop',
@@ -55,7 +54,7 @@ export const demoDocuments: Doc[] = [
     image: 'https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=500&h=300&fit=crop',
     category: 'guide',
     createdAt: new Date(Date.now() - 14 * 60 * 60 * 1000),
-    updatedAt: new Date(Date.now() - 3 * 1000)
+    updatedAt: new Date(Date.now() - 3 * 1000),
   },
   {
     id: 'shop-2',
@@ -65,7 +64,7 @@ export const demoDocuments: Doc[] = [
     image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&h=300&fit=crop',
     category: 'tutorial',
     createdAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000),
-    updatedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000)
+    updatedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000),
   },
   {
     id: 'shop-3',
@@ -75,10 +74,8 @@ export const demoDocuments: Doc[] = [
     image: 'https://images.unsplash.com/photo-1516534775068-bb57ce32cb20?w=500&h=300&fit=crop',
     category: 'reference',
     createdAt: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000),
-    updatedAt: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000)
+    updatedAt: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000),
   },
-
-  // Website Management Docs
   {
     id: 'website-1',
     productId: 'website',
@@ -87,7 +84,7 @@ export const demoDocuments: Doc[] = [
     image: 'https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=500&h=300&fit=crop',
     category: 'guide',
     createdAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000),
-    updatedAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000)
+    updatedAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000),
   },
   {
     id: 'website-2',
@@ -97,7 +94,7 @@ export const demoDocuments: Doc[] = [
     image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&h=300&fit=crop',
     category: 'blog',
     createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000),
-    updatedAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000)
+    updatedAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000),
   },
   {
     id: 'website-3',
@@ -107,10 +104,8 @@ export const demoDocuments: Doc[] = [
     image: 'https://images.unsplash.com/photo-1516534775068-bb57ce32cb20?w=500&h=300&fit=crop',
     category: 'reference',
     createdAt: new Date(Date.now() - 15 * 24 * 60 * 60 * 1000),
-    updatedAt: new Date(Date.now() - 15 * 24 * 60 * 60 * 1000)
+    updatedAt: new Date(Date.now() - 15 * 24 * 60 * 60 * 1000),
   },
-
-  // Digitale Vertretung Docs
   {
     id: 'representative-1',
     productId: 'representative',
@@ -119,7 +114,7 @@ export const demoDocuments: Doc[] = [
     image: 'https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=500&h=300&fit=crop',
     category: 'guide',
     createdAt: new Date(Date.now() - 8 * 24 * 60 * 60 * 1000),
-    updatedAt: new Date(Date.now() - 8 * 24 * 60 * 60 * 1000)
+    updatedAt: new Date(Date.now() - 8 * 24 * 60 * 60 * 1000),
   },
   {
     id: 'representative-2',
@@ -129,10 +124,8 @@ export const demoDocuments: Doc[] = [
     image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&h=300&fit=crop',
     category: 'tutorial',
     createdAt: new Date(Date.now() - 6 * 24 * 60 * 60 * 1000),
-    updatedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000)
+    updatedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000),
   },
-
-  // Veröffentlichung Docs
   {
     id: 'publishing-1',
     productId: 'publishing',
@@ -141,7 +134,7 @@ export const demoDocuments: Doc[] = [
     image: 'https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=500&h=300&fit=crop',
     category: 'guide',
     createdAt: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000),
-    updatedAt: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000)
+    updatedAt: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000),
   },
   {
     id: 'publishing-2',
@@ -151,10 +144,8 @@ export const demoDocuments: Doc[] = [
     image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&h=300&fit=crop',
     category: 'reference',
     createdAt: new Date(Date.now() - 12 * 24 * 60 * 60 * 1000),
-    updatedAt: new Date(Date.now() - 12 * 24 * 60 * 60 * 1000)
+    updatedAt: new Date(Date.now() - 12 * 24 * 60 * 60 * 1000),
   },
-
-  // Analytics Docs
   {
     id: 'analytics-1',
     productId: 'analytics',
@@ -163,7 +154,7 @@ export const demoDocuments: Doc[] = [
     image: 'https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=500&h=300&fit=crop',
     category: 'guide',
     createdAt: new Date(Date.now() - 9 * 24 * 60 * 60 * 1000),
-    updatedAt: new Date(Date.now() - 9 * 24 * 60 * 60 * 1000)
+    updatedAt: new Date(Date.now() - 9 * 24 * 60 * 60 * 1000),
   },
   {
     id: 'analytics-2',
@@ -173,10 +164,8 @@ export const demoDocuments: Doc[] = [
     image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&h=300&fit=crop',
     category: 'tutorial',
     createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000),
-    updatedAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000)
+    updatedAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000),
   },
-
-  // Security Docs
   {
     id: 'security-1',
     productId: 'security',
@@ -185,7 +174,7 @@ export const demoDocuments: Doc[] = [
     image: 'https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=500&h=300&fit=crop',
     category: 'guide',
     createdAt: new Date(Date.now() - 11 * 24 * 60 * 60 * 1000),
-    updatedAt: new Date(Date.now() - 11 * 24 * 60 * 60 * 1000)
+    updatedAt: new Date(Date.now() - 11 * 24 * 60 * 60 * 1000),
   },
   {
     id: 'security-2',
@@ -195,6 +184,6 @@ export const demoDocuments: Doc[] = [
     image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&h=300&fit=crop',
     category: 'reference',
     createdAt: new Date(Date.now() - 13 * 24 * 60 * 60 * 1000),
-    updatedAt: new Date(Date.now() - 13 * 24 * 60 * 60 * 1000)
-  }
+    updatedAt: new Date(Date.now() - 13 * 24 * 60 * 60 * 1000),
+  },
 ]
