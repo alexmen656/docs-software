@@ -5,42 +5,42 @@ export const products: Product[] = [
     id: 'shop',
     name: 'Shop Management',
     description: 'Verwaltung eines Online-Shops',
-    image: 'https://images.unsplash.com/photo-1460925895917-adf4e5a92e1a?w=500&h=300&fit=crop',
+    icon: '🛒',
     slug: 'shop'
   },
   {
     id: 'website',
     name: 'Website Management',
     description: 'Verwaltung einer Website',
-    image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&h=300&fit=crop',
+    icon: '🌐',
     slug: 'website'
   },
   {
     id: 'representative',
     name: 'Digitale Vertretung',
     description: 'Digitálne zastupiteľstvo',
-    image: 'https://images.unsplash.com/photo-1516534775068-bb57ce32cb20?w=500&h=300&fit=crop',
+    icon: '👤',
     slug: 'representative'
   },
   {
     id: 'publishing',
     name: 'Veröffentlichung',
     description: 'Zverejňovanie',
-    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&h=300&fit=crop',
+    icon: '📄',
     slug: 'publishing'
   },
   {
     id: 'analytics',
     name: 'Analytik & Berichte',
     description: 'Analytics and Reporting',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&h=300&fit=crop',
+    icon: '📊',
     slug: 'analytics'
   },
   {
     id: 'security',
     name: 'Sicherheit',
     description: 'Security & Compliance',
-    image: 'https://images.unsplash.com/photo-1516321318423-f06f70d504f0?w=500&h=300&fit=crop',
+    icon: '🔐',
     slug: 'security'
   }
 ]
