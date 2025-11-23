@@ -1,58 +1,200 @@
-import type { Doc } from '@/types'
+import type { Product, Doc } from '@/types'
+
+export const products: Product[] = [
+  {
+    id: 'shop',
+    name: 'Shop Management',
+    description: 'Verwaltung eines Online-Shops',
+    image: 'https://images.unsplash.com/photo-1460925895917-adf4e5a92e1a?w=500&h=300&fit=crop',
+    slug: 'shop'
+  },
+  {
+    id: 'website',
+    name: 'Website Management',
+    description: 'Verwaltung einer Website',
+    image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&h=300&fit=crop',
+    slug: 'website'
+  },
+  {
+    id: 'representative',
+    name: 'Digitale Vertretung',
+    description: 'Digitálne zastupiteľstvo',
+    image: 'https://images.unsplash.com/photo-1516534775068-bb57ce32cb20?w=500&h=300&fit=crop',
+    slug: 'representative'
+  },
+  {
+    id: 'publishing',
+    name: 'Veröffentlichung',
+    description: 'Zverejňovanie',
+    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&h=300&fit=crop',
+    slug: 'publishing'
+  },
+  {
+    id: 'analytics',
+    name: 'Analytik & Berichte',
+    description: 'Analytics and Reporting',
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&h=300&fit=crop',
+    slug: 'analytics'
+  },
+  {
+    id: 'security',
+    name: 'Sicherheit',
+    description: 'Security & Compliance',
+    image: 'https://images.unsplash.com/photo-1516321318423-f06f70d504f0?w=500&h=300&fit=crop',
+    slug: 'security'
+  }
+]
 
 export const demoDocuments: Doc[] = [
+  // Shop Management Docs
   {
-    id: '1',
-    title: 'Vue 3 Getting Started',
-    description: 'Learn the basics of Vue 3 and how to build reactive web applications with the Composition API.',
+    id: 'shop-1',
+    productId: 'shop',
+    title: 'Shop Grundlagen',
+    description: 'Lernen Sie die Grundlagen der Shop-Verwaltung kennen.',
     image: 'https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=500&h=300&fit=crop',
     category: 'guide',
     createdAt: new Date(Date.now() - 14 * 60 * 60 * 1000),
     updatedAt: new Date(Date.now() - 3 * 1000)
   },
   {
-    id: '2',
-    title: 'TypeScript Best Practices',
-    description: 'Master TypeScript fundamentals and learn industry best practices for type-safe development.',
+    id: 'shop-2',
+    productId: 'shop',
+    title: 'Produkte hinzufügen',
+    description: 'Schritt-für-Schritt Anleitung zum Hinzufügen von Produkten.',
     image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&h=300&fit=crop',
-    category: 'reference',
-    createdAt: new Date(Date.now() - 14 * 60 * 60 * 1000),
-    updatedAt: new Date(Date.now() - 14 * 60 * 60 * 1000)
-  },
-  {
-    id: '3',
-    title: 'REST API Design Guide',
-    description: 'Comprehensive guide to designing scalable and maintainable REST APIs with best practices.',
-    image: 'https://images.unsplash.com/photo-1516534775068-bb57ce32cb20?w=500&h=300&fit=crop',
-    category: 'guide',
-    createdAt: new Date(Date.now() - 15 * 60 * 60 * 1000),
-    updatedAt: new Date(Date.now() - 15 * 60 * 60 * 1000)
-  },
-  {
-    id: '4',
-    title: 'Database Optimization Tips',
-    description: 'Practical techniques for optimizing database performance and reducing query latency.',
-    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=500&h=300&fit=crop',
     category: 'tutorial',
     createdAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000),
-    updatedAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000)
-  },
-  {
-    id: '5',
-    title: 'Docker Container Deployment',
-    description: 'Step-by-step tutorial for containerizing applications and deploying with Docker.',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=500&h=300&fit=crop',
-    category: 'tutorial',
-    createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000),
-    updatedAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000)
-  },
-  {
-    id: '6',
-    title: 'Testing Strategies in React',
-    description: 'Learn unit testing, integration testing, and end-to-end testing for React applications.',
-    image: 'https://images.unsplash.com/photo-1516321318423-f06f70d504f0?w=500&h=300&fit=crop',
-    category: 'blog',
-    createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000),
     updatedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000)
+  },
+  {
+    id: 'shop-3',
+    productId: 'shop',
+    title: 'Bestellungen verwalten',
+    description: 'Best Practices für die Verwaltung von Bestellungen.',
+    image: 'https://images.unsplash.com/photo-1516534775068-bb57ce32cb20?w=500&h=300&fit=crop',
+    category: 'reference',
+    createdAt: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000),
+    updatedAt: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000)
+  },
+
+  // Website Management Docs
+  {
+    id: 'website-1',
+    productId: 'website',
+    title: 'Website erstellen',
+    description: 'Anfänger-Guide zur Website-Erstellung.',
+    image: 'https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=500&h=300&fit=crop',
+    category: 'guide',
+    createdAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000),
+    updatedAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000)
+  },
+  {
+    id: 'website-2',
+    productId: 'website',
+    title: 'SEO Optimierung',
+    description: 'Tipps zur Suchmaschinen-Optimierung.',
+    image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&h=300&fit=crop',
+    category: 'blog',
+    createdAt: new Date(Date.now() - 3 * 24 * 60 * 60 * 1000),
+    updatedAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000)
+  },
+  {
+    id: 'website-3',
+    productId: 'website',
+    title: 'Design-Richtlinien',
+    description: 'Best Practices im Web-Design.',
+    image: 'https://images.unsplash.com/photo-1516534775068-bb57ce32cb20?w=500&h=300&fit=crop',
+    category: 'reference',
+    createdAt: new Date(Date.now() - 15 * 24 * 60 * 60 * 1000),
+    updatedAt: new Date(Date.now() - 15 * 24 * 60 * 60 * 1000)
+  },
+
+  // Digitale Vertretung Docs
+  {
+    id: 'representative-1',
+    productId: 'representative',
+    title: 'Profil einrichten',
+    description: 'Anleitung zum Erstellen eines digitalen Profils.',
+    image: 'https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=500&h=300&fit=crop',
+    category: 'guide',
+    createdAt: new Date(Date.now() - 8 * 24 * 60 * 60 * 1000),
+    updatedAt: new Date(Date.now() - 8 * 24 * 60 * 60 * 1000)
+  },
+  {
+    id: 'representative-2',
+    productId: 'representative',
+    title: 'Verfügbarkeit verwalten',
+    description: 'Wie man seine Verfügbarkeit einstellt.',
+    image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&h=300&fit=crop',
+    category: 'tutorial',
+    createdAt: new Date(Date.now() - 6 * 24 * 60 * 60 * 1000),
+    updatedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000)
+  },
+
+  // Veröffentlichung Docs
+  {
+    id: 'publishing-1',
+    productId: 'publishing',
+    title: 'Inhalte veröffentlichen',
+    description: 'Schritt-für-Schritt Anleitung zur Veröffentlichung.',
+    image: 'https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=500&h=300&fit=crop',
+    category: 'guide',
+    createdAt: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000),
+    updatedAt: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000)
+  },
+  {
+    id: 'publishing-2',
+    productId: 'publishing',
+    title: 'Planung & Zeitplanung',
+    description: 'Best Practices für Content-Planung.',
+    image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&h=300&fit=crop',
+    category: 'reference',
+    createdAt: new Date(Date.now() - 12 * 24 * 60 * 60 * 1000),
+    updatedAt: new Date(Date.now() - 12 * 24 * 60 * 60 * 1000)
+  },
+
+  // Analytics Docs
+  {
+    id: 'analytics-1',
+    productId: 'analytics',
+    title: 'Analytics Einführung',
+    description: 'Grundlagen der Datenanalyse.',
+    image: 'https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=500&h=300&fit=crop',
+    category: 'guide',
+    createdAt: new Date(Date.now() - 9 * 24 * 60 * 60 * 1000),
+    updatedAt: new Date(Date.now() - 9 * 24 * 60 * 60 * 1000)
+  },
+  {
+    id: 'analytics-2',
+    productId: 'analytics',
+    title: 'Berichte generieren',
+    description: 'Wie man automatisierte Berichte erstellt.',
+    image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&h=300&fit=crop',
+    category: 'tutorial',
+    createdAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000),
+    updatedAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000)
+  },
+
+  // Security Docs
+  {
+    id: 'security-1',
+    productId: 'security',
+    title: 'Sicherheit Grundlagen',
+    description: 'Einführung in Sicherheitsmaßnahmen.',
+    image: 'https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=500&h=300&fit=crop',
+    category: 'guide',
+    createdAt: new Date(Date.now() - 11 * 24 * 60 * 60 * 1000),
+    updatedAt: new Date(Date.now() - 11 * 24 * 60 * 60 * 1000)
+  },
+  {
+    id: 'security-2',
+    productId: 'security',
+    title: 'Zugriff kontrollieren',
+    description: 'Verwaltung von Benutzerrollen und Zugriffen.',
+    image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&h=300&fit=crop',
+    category: 'reference',
+    createdAt: new Date(Date.now() - 13 * 24 * 60 * 60 * 1000),
+    updatedAt: new Date(Date.now() - 13 * 24 * 60 * 60 * 1000)
   }
 ]
