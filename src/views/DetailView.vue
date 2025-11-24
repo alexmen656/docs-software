@@ -1,5 +1,5 @@
 <template>
-    <div class="min-h-screen bg-gray-50 dark:bg-slate-900 lg:pr-80">
+    <div class="min-h-full bg-gray-50 dark:bg-slate-900 lg:pr-80">
         <div class="max-w-4xl mx-auto px-8 py-12">
             <div class="prose prose-sm dark:prose-invert max-w-none">
                 <div class="dark:bg-slate-800 dark:border-gray-700 top-0 z-20">

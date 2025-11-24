@@ -1,6 +1,6 @@
 <template>
     <header class="bg-white dark:bg-gray-800 fixed top-0 left-0 right-0 z-50">
-        <div class="mx-auto px-4 sm:px-3 2xl:px-3"><!--px-3-->
+        <div class="mx-auto px-4 sm:px-3 2xl:px-3">
             <div class="flex justify-between items-center h-15">
                 <div class="flex items-center">
                     <div class="flex-shrink-0 flex items-center logo-container"
@@ -8,17 +8,14 @@
                         <img class="logo-image" src="../assets/logo-syscom.svg" alt="Logo">
                     </div>
                 </div>
-                <!--{{ route === 'landing' }}-->
                 <div v-if="showSearch" class="hidden md:flex flex-1 max-w-2xl mx-8">
-                    <!--!(route == 'landing' || route == '')-->
                     <div class="relative w-full search-container">
                         <svg class="absolute left-3 top-2.5 w-5 h-5 text-gray-400 dark:text-gray-500"
-                            viewBox="0 0 20 20" fill="currentColor"><!--pt-1-->
+                            viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd"
                                 d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
                                 clip-rule="evenodd" />
                         </svg>
-                        <!-- py-3 instead of 2-->
                         <input type="text" placeholder="Search the docs..."
                             class="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400" />
                     </div>
@@ -28,7 +25,7 @@
                         <button
                             class="flex items-center space-x-3 hover:bg-gray-50 dark:hover:bg-gray-700 rounded-lg px-3 py-2 transition-colors">
                             <span
-                                class="w-8 h-8 rounded-full overflow-hidden flex items-center justify-center bg-white dark:bg-gray-800 border text-xl">🇺🇸</span>
+                                class="w-8 h-8 overflow-hidden flex items-center justify-center text-xl">🇺🇸</span>
                             <span
                                 class="hidden sm:block text-md font-medium text-gray-700 dark:text-gray-200">English</span>
                             <svg class="w-4 h-4 text-gray-400 dark:text-gray-500" fill="currentColor"
@@ -73,6 +70,9 @@
                             </path>
                         </svg>
                     </button>
+                    <button @click="router.push('/login')" class="bg-red-500 text-black font-semibold py-2 px-4 rounded-lg">
+                        Log In
+                    </button>
                 </div>
             </div>
         </div>
@@ -80,12 +80,9 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter, useRoute } from 'vue-router'
+import { useRouter } from 'vue-router'
 
 const router = useRouter()
-//const route = useRoute()
-//console.log(route.name)
-
 const showSearch = window.location.pathname !== '/' && window.location.pathname !== '/landing'
 </script>
 

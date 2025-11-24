@@ -16,7 +16,7 @@ const showSidebar = computed(() => {
 })
 
 const showFooter = computed(() => {
-  return ['landing', 'login', 'signup'].includes(route.name as string)
+  return ['landing', 'signup'].includes(route.name as string)
 })
 </script>
 
@@ -62,6 +62,7 @@ const showFooter = computed(() => {
 }
 
 .p60 {
-  padding-top: 60px;
+  margin-top: 60px;
+  min-height: calc(100vh - 60px);
 }
 </style>

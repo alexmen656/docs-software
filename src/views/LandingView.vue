@@ -42,7 +42,7 @@ const navigateToDoc = (docId: string) => {
 </script>
 
 <template>
-    <div class="min-h-screen bg-gray-50 dark:bg-slate-900">
+    <div class="min-h-full bg-gray-50 dark:bg-slate-900">
         <div class="bg-white dark:bg-slate-800 border-b border-gray-200 dark:border-gray-700 image-sec">
             <div class="max-w-7xl mx-auto px-8 py-24">
                 <h1 class="text-5xl font-bold text-gray-900 text-white dark:text-white mb-8">Knowledge Hub</h1>

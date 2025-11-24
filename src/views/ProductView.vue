@@ -44,7 +44,7 @@ const navigateToDoc = (docId: string) => {
 </script>
 
 <template>
-    <div v-if="currentProduct" class="min-h-screen bg-white dark:bg-slate-900">
+    <div v-if="currentProduct" class="min-h-full bg-white dark:bg-slate-900">
         <div class="px-8 py-6 border-b border-gray-200 dark:border-gray-700">
             <button @click="goBack"
                 class="flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 mb-4 transition-colors">
