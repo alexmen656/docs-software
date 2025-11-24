@@ -1,4 +1,4 @@
-import type { Product, Doc } from '@/types'
+import type { Product, Doc, Chapter, DocItem } from '@/types'
 
 export const products: Product[] = [
   {
@@ -45,11 +45,11 @@ export const products: Product[] = [
   },
 ]
 
-export const demoDocuments: Doc[] = [
-  // Shop Management Docs
+const rawDocs = [
   {
     id: 'shop-1',
     productId: 'shop',
+    parentId: 'shop-chapter-1',
     title: 'Shop Grundlagen',
     description: 'Lernen Sie die Grundlagen der Shop-Verwaltung kennen.',
     image: 'https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=500&h=300&fit=crop',
@@ -60,6 +60,7 @@ export const demoDocuments: Doc[] = [
   {
     id: 'shop-2',
     productId: 'shop',
+    parentId: 'shop-chapter-1',
     title: 'Produkte hinzufügen',
     description: 'Schritt-für-Schritt Anleitung zum Hinzufügen von Produkten.',
     image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&h=300&fit=crop',
@@ -80,6 +81,7 @@ export const demoDocuments: Doc[] = [
   {
     id: 'shop-4',
     productId: 'shop',
+    parentId: 'shop-chapter-2',
     title: 'Zahlungsmethoden einrichten',
     description: 'Integration von Stripe, PayPal und anderen Zahlungsanbietern.',
     image: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500&h=300&fit=crop',
@@ -100,6 +102,7 @@ export const demoDocuments: Doc[] = [
   {
     id: 'shop-6',
     productId: 'shop',
+    parentId: 'shop-chapter-2',
     title: 'Rabatte und Gutscheine',
     description: 'Erstellen Sie attraktive Rabattaktionen für Ihre Kunden.',
     image: 'https://images.unsplash.com/photo-1607083206968-13611e3d76db?w=500&h=300&fit=crop',
@@ -132,6 +135,7 @@ export const demoDocuments: Doc[] = [
   {
     id: 'website-1',
     productId: 'website',
+    parentId: 'website-chapter-1',
     title: 'Website erstellen',
     description: 'Anfänger-Guide zur Website-Erstellung.',
     image: 'https://images.unsplash.com/photo-1633356122544-f134324ef6db?w=500&h=300&fit=crop',
@@ -142,6 +146,7 @@ export const demoDocuments: Doc[] = [
   {
     id: 'website-2',
     productId: 'website',
+    parentId: 'website-chapter-1',
     title: 'SEO Optimierung',
     description: 'Tipps zur Suchmaschinen-Optimierung.',
     image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=500&h=300&fit=crop',
@@ -498,3 +503,37 @@ export const demoDocuments: Doc[] = [
     updatedAt: new Date(Date.now() - 8 * 24 * 60 * 60 * 1000),
   },
 ]
+
+export const demoDocuments = rawDocs.map(doc => ({ ...doc, type: 'article' as const })) as Doc[]
+
+export const chapters: Chapter[] = [
+  {
+    id: 'shop-chapter-1',
+    productId: 'shop',
+    title: 'Erste Schritte',
+    description: 'Alles was Sie für den Start mit Ihrem Shop wissen müssen.',
+    createdAt: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000),
+    updatedAt: new Date(Date.now() - 1 * 24 * 60 * 60 * 1000),
+    type: 'chapter',
+  },
+  {
+    id: 'shop-chapter-2',
+    productId: 'shop',
+    title: 'Fortgeschrittene Features',
+    description: 'Erweiterte Funktionen für erfahrene Shop-Betreiber.',
+    createdAt: new Date(Date.now() - 25 * 24 * 60 * 60 * 1000),
+    updatedAt: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000),
+    type: 'chapter',
+  },
+  {
+    id: 'website-chapter-1',
+    productId: 'website',
+    title: 'Website Grundlagen',
+    description: 'Die Basics der Website-Erstellung und -Verwaltung.',
+    createdAt: new Date(Date.now() - 28 * 24 * 60 * 60 * 1000),
+    updatedAt: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000),
+    type: 'chapter',
+  },
+]
+
+export const allDocItems: DocItem[] = [...chapters, ...demoDocuments]

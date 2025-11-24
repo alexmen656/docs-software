@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import LandingView from '../views/LandingView.vue'
 import ProductView from '../views/ProductView.vue'
+import ChapterView from '../views/ChapterView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -15,6 +16,12 @@ const router = createRouter({
       path: '/product/:slug',
       name: 'product',
       component: ProductView,
+      meta: { requiresGuest: true },
+    },
+    {
+      path: '/chapter/:id',
+      name: 'chapter',
+      component: ChapterView,
       meta: { requiresGuest: true },
     },
     {

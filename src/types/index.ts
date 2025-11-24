@@ -6,9 +6,22 @@ export interface Product {
   slug: string
 }
 
+export interface Chapter {
+  id: string
+  productId: string
+  parentId?: string
+  title: string
+  description: string
+  image?: string
+  createdAt: Date
+  updatedAt: Date
+  type: 'chapter'
+}
+
 export interface Doc {
   id: string
   productId: string
+  parentId?: string
   title: string
   description: string
   image: string
@@ -16,4 +29,7 @@ export interface Doc {
   createdAt: Date
   updatedAt: Date
   category: 'guide' | 'tutorial' | 'reference' | 'blog'
+  type: 'article'
 }
+
+export type DocItem = Chapter | Doc

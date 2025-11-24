@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useRoute, useRouter, RouterLink } from 'vue-router'
-import { products, allDocItems } from '@/demo-data/docs'
+import { chapters, allDocItems } from '@/demo-data/docs'
 import { useTheme } from '@/composables/useTheme'
 import type { DocItem } from '@/types'
 
@@ -13,20 +13,19 @@ setCSSVariables()
 
 const sortBy = ref<'name' | 'recent'>('recent')
 
-const slug = route.params.slug as string
-const currentProduct = computed(() => products.find(p => p.slug === slug))
+const chapterId = route.params.id as string
+const currentChapter = computed(() => chapters.find(c => c.id === chapterId))
 
-const productItems = computed(() => {
-    const productId = currentProduct.value?.id
-    if (!productId) return []
-    return allDocItems.filter(item => item.productId === productId && !item.parentId)
+const chapterItems = computed(() => {
+    if (!currentChapter.value) return []
+    return allDocItems.filter(item => item.parentId === chapterId)
 })
 
 const sortedItems = computed(() => {
     if (sortBy.value === 'name') {
-        return [...productItems.value].sort((a, b) => a.title.localeCompare(b.title))
+        return [...chapterItems.value].sort((a, b) => a.title.localeCompare(b.title))
     }
-    return [...productItems.value].sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime())
+    return [...chapterItems.value].sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime())
 })
 
 const formatDate = (date: Date) => {
@@ -58,10 +57,10 @@ const getItemIcon = (item: DocItem) => {
 </script>
 
 <template>
-    <div v-if="currentProduct" class="min-h-full bg-gray-50 dark:bg-slate-900 lg:pr-80">
+    <div v-if="currentChapter" class="min-h-full bg-gray-50 dark:bg-slate-900 lg:pr-80">
         <div class="max-w-4xl mx-auto px-8 pt-6 pb-12">
             <div class="max-w-4xl mx-auto pt-4 pb-3">
-                <nav class="flex items-center space-x-3 text-sm text-gray-600 dark:text-gray-400 mb-3"><!--mb-4-->
+                <nav class="flex items-center space-x-3 text-sm text-gray-600 dark:text-gray-400 mb-3">
                     <router-link to="/" class="hover:text-gray-900 dark:hover:text-gray-200">
                         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                             <path
@@ -69,36 +68,11 @@ const getItemIcon = (item: DocItem) => {
                         </svg>
                     </router-link>
                     <span>›</span>
-                    <span class="font-medium text-primary">{{ currentProduct.name }}</span>
+                    <span class="font-medium text-primary">{{ currentChapter.title }}</span>
                 </nav>
-                <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">{{ currentProduct.name }}</h1>
+                <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">{{ currentChapter.title }}</h1>
                 <p class="text-gray-700 dark:text-gray-300 text-lg mb-8">{{ sortedItems.length }} Artikel</p>
             </div>
-
-            <!--   <div class="flex items-center justify-between mb-8">
-                <div>
-                    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Dokumentationen</h2>
-                    <p class="text-gray-600 dark:text-gray-400 text-sm">{{ sortedDocs.length }} Artikel</p>
-                </div>
-                <div class="flex items-center gap-4">
-                    <span class="text-sm font-medium text-gray-600 dark:text-gray-400">Sort</span>
-                    <button @click="sortBy = 'name'" :class="[
-                        'px-3 py-1 text-sm rounded border transition-colors',
-                        sortBy === 'name'
-                            ? 'border-gray-400 bg-gray-50 dark:bg-gray-800 dark:border-gray-600 text-gray-900 dark:text-white'
-                            : 'border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800'
-                    ]">
-                        Name
-                    </button>
-                    <button @click="sortBy = 'recent'"
-                        class="p-1 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                        </svg>
-                    </button>
-                </div>
-            </div>-->
 
             <div class="space-y-4">
                 <div v-for="item in sortedItems" :key="item.id" @click="navigateToItem(item)"
@@ -140,13 +114,13 @@ const getItemIcon = (item: DocItem) => {
 
     <div
         class="hidden lg:flex fixed right-0 top-0 w-80 h-screen bg-gray-50 dark:bg-slate-900 border-l border-gray-200 dark:border-gray-700 px-6 py-10 flex-col overflow-y-auto p60">
-        <div v-if="currentProduct" class="space-y-6">
+        <div v-if="currentChapter" class="space-y-6">
             <div>
                 <h3 class="text-sm font-semibold uppercase mb-3 text-primary">
-                    {{ currentProduct.name }}
+                    {{ currentChapter.title }}
                 </h3>
                 <p class="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
-                    {{ currentProduct.description }}
+                    {{ currentChapter.description }}
                 </p>
             </div>
 
