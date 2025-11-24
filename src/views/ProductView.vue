@@ -46,7 +46,7 @@ const formatDate = (date: Date) => {
 
 <template>
     <div v-if="currentProduct" class="min-h-full bg-gray-50 dark:bg-slate-900 lg:pr-80">
-        <div class="max-w-4xl mx-auto px-8 py-12">
+        <div class="max-w-4xl mx-auto px-8 pt-6 pb-12">
             <div class="max-w-4xl mx-auto py-4">
                 <nav class="flex items-center space-x-3 text-sm text-gray-600 dark:text-gray-400 mb-4">
                     <router-link to="/" class="hover:text-gray-900 dark:hover:text-gray-200">
@@ -59,10 +59,11 @@ const formatDate = (date: Date) => {
                     <span class="font-medium text-primary">{{ currentProduct.name }}</span>
                 </nav>
                 <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">{{ currentProduct.name }}</h1>
-                <p class="text-gray-700 dark:text-gray-300 text-lg mb-8">{{ currentProduct.description }}</p>
+                <p class="text-gray-700 dark:text-gray-300 text-lg mb-8"><!--{{ currentProduct.description }}-->{{
+                    sortedDocs.length }} Artikel</p>
             </div>
 
-            <div class="flex items-center justify-between mb-8">
+            <!--   <div class="flex items-center justify-between mb-8">
                 <div>
                     <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Dokumentationen</h2>
                     <p class="text-gray-600 dark:text-gray-400 text-sm">{{ sortedDocs.length }} Artikel</p>
@@ -85,7 +86,7 @@ const formatDate = (date: Date) => {
                         </svg>
                     </button>
                 </div>
-            </div>
+            </div>-->
 
             <div class="space-y-4">
                 <router-link v-for="doc in sortedDocs" :key="doc.id" :to="{ name: 'doc', params: { id: doc.id } }"

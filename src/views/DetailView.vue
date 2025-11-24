@@ -1,8 +1,8 @@
 <template>
     <div class="min-h-full bg-gray-50 dark:bg-slate-900 lg:pr-80">
-        <div class="max-w-4xl mx-auto px-8 py-12">
+        <div class="max-w-4xl mx-auto px-8 pt-6 pb-12">
             <div class="prose prose-sm dark:prose-invert max-w-none">
-                <div class="dark:bg-slate-800 dark:border-gray-700 top-0 z-20">
+                <div class="dark:border-gray-700 top-0 z-20">
                     <div class="max-w-4xl mx-auto py-4">
                         <nav class="flex items-center space-x-3 text-sm text-gray-600 dark:text-gray-400 mb-4">
                             <router-link to="/" class="hover:text-gray-900 dark:hover:text-gray-200">
