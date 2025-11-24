@@ -3,8 +3,12 @@ import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { products, demoDocuments } from '@/demo-data/docs'
 import type { Product } from '@/types'
+import { useTheme } from '@/composables/useTheme'
 
 const router = useRouter()
+const { setCSSVariables } = useTheme()
+
+setCSSVariables()
 const productList = ref<Product[]>(products)
 const searchQuery = ref('')
 
@@ -44,7 +48,7 @@ const navigateToDoc = (docId: string) => {
 <template>
     <div class="min-h-full bg-gray-50 dark:bg-slate-900">
         <div class="bg-white dark:bg-slate-800 border-b border-gray-200 dark:border-gray-700 image-sec">
-            <div class="max-w-7xl mx-auto px-8 py-24">
+            <div class="max-w-7xl mx-auto px-8 py-24 2xl:py-32">
                 <h1 class="text-5xl font-bold text-gray-900 text-white dark:text-white mb-8">Knowledge Hub</h1>
                 <div class="relative">
                     <div class="relative">
@@ -54,7 +58,7 @@ const navigateToDoc = (docId: string) => {
                                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
                         <input v-model="searchQuery" type="text" placeholder="Search documentation..."
-                            class="w-full pl-12 pr-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400" />
+                            class="w-full pl-12 pr-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus-ring-primary" />
                     </div>
                 </div>
             </div>
@@ -67,7 +71,7 @@ const navigateToDoc = (docId: string) => {
                         <div v-for="doc in filteredDocs" :key="doc.id" @click="navigateToDoc(doc.id)"
                             class="group cursor-pointer rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-gray-400 dark:hover:border-gray-600 transition-all hover:shadow-lg p-6">
                             <h3
-                                class="text-lg font-semibold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                                class="text-lg font-semibold text-gray-900 dark:text-white mb-2 text-primary-hover transition-colors">
                                 {{ doc.title }}
                             </h3>
                             <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">

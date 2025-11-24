@@ -21,7 +21,6 @@
   --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
 }
 
-/* semantic color variables for this project */
 :root {
   --color-background: var(--vt-c-white);
   --color-background-soft: var(--vt-c-white-soft);
@@ -34,6 +33,12 @@
   --color-text: var(--vt-c-text-light-1);
 
   --section-gap: 160px;
+
+  --color-primary-300: #fca5a5;
+  --color-primary-400: #f87171;
+  --color-primary-500: #ef4444;
+  --color-primary-600: #dc2626;
+  --color-primary-700: #b91c1c;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -102,4 +107,44 @@ body {
   ::-webkit-scrollbar-thumb:hover {
     background: #64748b;
   }
+}
+
+.text-primary {
+  color: var(--color-primary-500);
+}
+
+@media (prefers-color-scheme: dark) {
+  .text-primary {
+    color: var(--color-primary-400);
+  }
+}
+
+.text-primary-hover:hover {
+  color: var(--color-primary-600);
+}
+
+@media (prefers-color-scheme: dark) {
+  .text-primary-hover:hover {
+    color: var(--color-primary-300);
+  }
+}
+
+.bg-primary {
+  background-color: var(--color-primary-500);
+}
+
+.bg-primary-hover:hover {
+  background-color: var(--color-primary-600);
+}
+
+.border-primary {
+  border-color: var(--color-primary-500);
+}
+
+.ring-primary {
+  --tw-ring-color: var(--color-primary-500);
+}
+
+.focus-ring-primary:focus {
+  --tw-ring-color: var(--color-primary-500);
 }

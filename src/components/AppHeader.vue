@@ -70,7 +70,7 @@
                             </path>
                         </svg>
                     </button>
-                    <button @click="router.push('/login')" class="bg-red-500 text-black font-semibold py-2 px-4 rounded-lg">
+                    <button @click="router.push('/login')" class="text-white font-semibold py-2 px-4 rounded-lg bg-primary bg-primary-hover">
                         Log In
                     </button>
                 </div>
@@ -81,8 +81,12 @@
 
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
+import { useTheme } from '@/composables/useTheme'
 
 const router = useRouter()
+const { setCSSVariables } = useTheme()
+
+setCSSVariables()
 const showSearch = window.location.pathname !== '/' && window.location.pathname !== '/landing'
 </script>
 

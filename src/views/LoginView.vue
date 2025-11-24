@@ -19,7 +19,7 @@
                             Email or Username
                         </label>
                         <input id="username" v-model="username" name="username" type="text" required
-                            class="appearance-none block w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent sm:text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors"
+                            class="appearance-none block w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus-ring-primary focus:border-transparent sm:text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors"
                             placeholder="your@email.com or username">
                     </div>
                     <div>
@@ -27,26 +27,26 @@
                             Password
                         </label>
                         <input id="password" v-model="password" name="password" type="password" required
-                            class="appearance-none block w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent sm:text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors"
+                            class="appearance-none block w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus-ring-primary focus:border-transparent sm:text-sm bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 transition-colors"
                             placeholder="••••••••">
                     </div>
                     <div class="flex items-center justify-between">
                         <div class="flex items-center">
                             <input id="remember-me" v-model="rememberMe" name="remember-me" type="checkbox"
-                                class="h-4 w-4 text-red-500 focus:ring-red-500 border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700">
+                                class="h-4 w-4 border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-primary focus-ring-primary">
                             <label for="remember-me" class="ml-2 block text-sm text-gray-700 dark:text-gray-300">
                                 Remember me
                             </label>
                         </div>
                         <div class="text-sm">
                             <a href="#"
-                                class="font-medium text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-300 transition-colors">
+                                class="font-medium transition-colors text-primary text-primary-hover">
                                 Forgot password?
                             </a>
                         </div>
                     </div>
                     <button type="submit" :disabled="isLoading"
-                        class="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-semibold text-white bg-red-500 hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 dark:focus:ring-offset-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+                        class="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-semibold text-white bg-primary bg-primary-hover focus:outline-none focus:ring-2 focus-ring-primary focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
                         <svg v-if="isLoading" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4">
@@ -62,7 +62,7 @@
                     <p class="text-sm text-gray-600 dark:text-gray-400">
                         Don't have an account?
                         <router-link to="/signup"
-                            class="font-medium text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-300 transition-colors">
+                            class="font-medium transition-colors text-primary text-primary-hover">
                             Sign up
                         </router-link>
                     </p>
@@ -75,8 +75,13 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+import { useTheme } from '@/composables/useTheme'
 
 const router = useRouter()
+const { setCSSVariables } = useTheme()
+
+setCSSVariables()
+
 const username = ref('')
 const password = ref('')
 const rememberMe = ref(false)

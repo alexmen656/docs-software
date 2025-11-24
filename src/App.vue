@@ -1,11 +1,17 @@
 <script setup lang="ts">
 import { RouterView, useRoute } from 'vue-router'
-import { computed } from 'vue'
+import { computed, onMounted } from 'vue'
 import AppHeader from './components/AppHeader.vue'
 import AppSidebar from './components/AppSidebar.vue'
 import AppFooter from './components/AppFooter.vue'
+import { useTheme } from './composables/useTheme'
 
 const route = useRoute()
+const { setCSSVariables } = useTheme()
+
+onMounted(() => {
+  setCSSVariables()
+})
 
 /*const showHeader = computed(() => {
   return !['landing', 'login', 'signup'].includes(route.name as string)

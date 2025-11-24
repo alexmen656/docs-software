@@ -16,7 +16,7 @@
                                 Core Features
                             </router-link>
                             <span>›</span>
-                            <span class="text-red-600 dark:text-red-400 font-medium">{{ docData?.title }}</span>
+                            <span class="font-medium text-primary">{{ docData?.title }}</span>
                         </nav>
                         <h1 class="text-4xl font-bold text-gray-900 dark:text-white">{{ docData?.title }}</h1>
                     </div>
@@ -109,7 +109,7 @@
                         class="text-sm font-medium text-gray-600 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-gray-200 mb-2">«
                         Previous</span>
                     <span
-                        class="text-lg font-semibold text-red-600 dark:text-red-400 group-hover:text-red-700 dark:group-hover:text-red-500">{{
+                        class="text-lg font-semibold text-primary text-primary-hover">{{
                             previousDoc?.title }}</span>
                 </router-link>
                 <div v-else></div>
@@ -119,7 +119,7 @@
                         class="text-sm font-medium text-gray-600 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-gray-200 mb-2">Next
                         »</span>
                     <span
-                        class="text-lg font-semibold text-red-600 dark:text-red-400 group-hover:text-red-700 dark:group-hover:text-red-500">{{
+                        class="text-lg font-semibold text-primary text-primary-hover">{{
                             nextDoc?.title }}</span>
                 </router-link>
             </div>
@@ -129,12 +129,12 @@
         class="hidden lg:flex fixed right-0 top-0 w-80 h-screen bg-gray-50 dark:bg-slate-900 border-l border-gray-200 dark:border-gray-700 px-6 py-10 flex-col overflow-y-auto p60">
         <div class="space-y-6">
             <div>
-                <h3 class="text-sm font-semibold text-red-600 dark:text-red-400 uppercase mb-3">
+                <h3 class="text-sm font-semibold uppercase mb-3 text-primary">
                     Overview
                 </h3>
                 <nav class="space-y-2">
                     <a href="#section-0"
-                        class="block text-sm text-gray-700 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400 transition-colors font-medium">
+                        class="block text-sm text-gray-700 dark:text-gray-300 transition-colors font-medium text-primary-hover">
                         {{ docData?.title }}
                     </a>
                     <a href="#section-1"
@@ -265,9 +265,13 @@
 import { computed } from 'vue'
 import { useRoute, RouterLink } from 'vue-router'
 import { demoDocuments } from '@/demo-data/docs'
+import { useTheme } from '@/composables/useTheme'
 
 const route = useRoute()
 const docId = route.params.id as string
+const { setCSSVariables } = useTheme()
+
+setCSSVariables()
 
 const docData = computed(() => {
     return demoDocuments.find(doc => doc.id === docId)

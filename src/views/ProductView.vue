@@ -2,9 +2,14 @@
 import { ref, computed } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { products, demoDocuments } from '@/demo-data/docs'
+import { useTheme } from '@/composables/useTheme'
 
 const route = useRoute()
 const router = useRouter()
+const { setCSSVariables } = useTheme()
+
+// Ensure CSS variables are set
+setCSSVariables()
 const sortBy = ref<'name' | 'recent'>('recent')
 
 const slug = route.params.slug as string
@@ -47,7 +52,7 @@ const navigateToDoc = (docId: string) => {
     <div v-if="currentProduct" class="min-h-full bg-white dark:bg-slate-900">
         <div class="px-8 py-6 border-b border-gray-200 dark:border-gray-700">
             <button @click="goBack"
-                class="flex items-center text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 mb-4 transition-colors">
+                class="flex items-center text-primary text-primary-hover mb-4 transition-colors">
                 <svg class="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                 </svg>
@@ -97,7 +102,7 @@ const navigateToDoc = (docId: string) => {
                     </div>
                     <div class="p-5">
                         <h3
-                            class="text-lg font-semibold text-gray-900 dark:text-white mb-2 line-clamp-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                            class="text-lg font-semibold text-gray-900 dark:text-white mb-2 line-clamp-2 text-primary-hover transition-colors">
                             {{ doc.title }}
                         </h3>
                         <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">

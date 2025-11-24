@@ -8,7 +8,7 @@
             </div>
             <div class="px-2 space-y-1">
                 <button @click="toggleCategory('core')"
-                    class="w-full flex items-center justify-between px-4 py-2.5 text-left font-semibold text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 rounded transition-colors group">
+                    class="w-full flex items-center justify-between px-4 py-2.5 text-left font-semibold rounded transition-colors group text-primary hover:bg-gray-50 dark:hover:bg-gray-700">
                     <span class="flex items-center space-x-3">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -33,11 +33,11 @@
                     </div>
                     <div
                         class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 bg-gray-100 dark:bg-gray-700 rounded cursor-pointer transition-colors">
-                        <svg class="w-4 h-4 mr-3 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-4 h-4 mr-3 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <span class="text-sm font-medium text-red-600 dark:text-red-400">Services Management</span>
+                        <span class="text-sm font-medium text-primary">Services Management</span>
                     </div>
                     <div
                         class="flex items-center px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded cursor-pointer transition-colors">
@@ -96,6 +96,11 @@
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useTheme } from '@/composables/useTheme'
+
+const { setCSSVariables } = useTheme()
+
+setCSSVariables()
 
 const expandedCategories = ref(['core'])
 
