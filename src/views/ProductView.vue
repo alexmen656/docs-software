@@ -47,8 +47,8 @@ const formatDate = (date: Date) => {
 <template>
     <div v-if="currentProduct" class="min-h-full bg-gray-50 dark:bg-slate-900 lg:pr-80">
         <div class="max-w-4xl mx-auto px-8 pt-6 pb-12">
-            <div class="max-w-4xl mx-auto py-4">
-                <nav class="flex items-center space-x-3 text-sm text-gray-600 dark:text-gray-400 mb-4">
+            <div class="max-w-4xl mx-auto pt-4 pb-3">
+                <nav class="flex items-center space-x-3 text-sm text-gray-600 dark:text-gray-400 mb-3"><!--mb-4-->
                     <router-link to="/" class="hover:text-gray-900 dark:hover:text-gray-200">
                         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                             <path
@@ -91,7 +91,7 @@ const formatDate = (date: Date) => {
             <div class="space-y-4">
                 <router-link v-for="doc in sortedDocs" :key="doc.id" :to="{ name: 'doc', params: { id: doc.id } }"
                     class="group flex items-start gap-6 p-6 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-gray-400 dark:hover:border-gray-600 transition-all hover:shadow-lg bg-white dark:bg-slate-800">
-                    <div
+                    <div v-show="false"
                         class="relative w-32 h-32 flex-shrink-0 overflow-hidden rounded-lg bg-gray-200 dark:bg-gray-700">
                         <img :src="doc.image" :alt="doc.title"
                             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
