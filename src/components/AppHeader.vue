@@ -80,14 +80,27 @@
 </template>
 
 <script setup lang="ts">
-import { useRouter } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
+import { ref, watch } from 'vue'
 import { useTheme } from '@/composables/useTheme'
 
 const router = useRouter()
+const route = useRoute()
 const { setCSSVariables } = useTheme()
 
 setCSSVariables()
-const showSearch = window.location.pathname !== '/' && window.location.pathname !== '/landing'
+
+const evaluateShowSearch = () => {
+  const pathname = route.path
+  return pathname !== '/' && pathname !== '' && pathname !== '/landing' && pathname !== '/login'
+}
+
+const showSearch = ref(evaluateShowSearch())
+
+watch(() => route.path, () => {
+  showSearch.value = evaluateShowSearch()
+  console.log('Route changed, showSearch:', showSearch.value)
+})
 </script>
 
 <style scoped>

@@ -57,7 +57,8 @@ export const useTheme = () => {
     return colors?.[shade] || '#ef4444'
   }
 
-  const setCSSVariables = () => {
+  const setCSSVariables = (source="default") => {
+    console.log(`[useTheme][setCSSVariables] from ${source}`)
     const root = document.documentElement
     const color = primaryColor.value
     const colors = colorMap[color] || colorMap['red']
