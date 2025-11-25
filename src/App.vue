@@ -53,12 +53,16 @@ const showFooter = computed(() => {
 }
 
 .main-content {
-  border-top-left-radius: 16px;
-  /*24*/
   background: white;
   overflow: hidden;
   margin-top: 60px;
   min-height: calc(100vh - 60px);
+}
+
+@media (width >=64rem) {
+  .main-content {
+    border-top-left-radius: 16px;
+  }
 }
 
 @media (prefers-color-scheme: dark) {

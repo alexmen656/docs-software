@@ -62,7 +62,7 @@ const getItemIcon = (item: DocItem) => {
 
 <template>
     <div v-if="currentChapter" class="min-h-full bg-gray-50 dark:bg-slate-900 lg:pr-80">
-        <div class="max-w-4xl mx-auto px-8 pt-6 pb-12">
+        <div class="max-w-4xl mx-auto px-4 sm:px-8 pt-4 sm:pt-6 pb-8 sm:pb-12">
             <div class="max-w-4xl mx-auto pt-4 pb-3">
                 <nav aria-label="Breadcrumb" class="mb-3">
                     <ol class="flex items-center space-x-3 text-sm text-gray-600 dark:text-gray-400 list-none m-0 p-0">
@@ -79,8 +79,9 @@ const getItemIcon = (item: DocItem) => {
                         <li aria-current="page" class="font-medium text-primary">{{ currentChapter.title }}</li>
                     </ol>
                 </nav>
-                <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">{{ currentChapter.title }}</h1>
-                <p class="text-gray-700 dark:text-gray-300 text-lg mb-8">{{ sortedItems.length }} Artikel</p>
+                <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">{{ currentChapter.title }}
+                </h1>
+                <p class="text-gray-700 dark:text-gray-300 text-lg mb-6 sm:mb-8">{{ sortedItems.length }} Artikel</p>
             </div>
 
             <div class="space-y-4">
@@ -88,9 +89,12 @@ const getItemIcon = (item: DocItem) => {
                     class="group relative flex items-start gap-6 p-6 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-gray-400 dark:hover:border-gray-600 transition-all hover:shadow-lg bg-white dark:bg-slate-800">
                     <div class="flex-1 min-w-0">
                         <div class="flex items-center gap-2 mb-2">
-                            <svg class="w-5 h-5" :class="item.type === 'chapter' ? 'text-primary' : 'text-gray-500 dark:text-gray-400'" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true" v-html="getItemIcon(item)">
+                            <svg class="w-5 h-5"
+                                :class="item.type === 'chapter' ? 'text-primary' : 'text-gray-500 dark:text-gray-400'"
+                                fill="currentColor" viewBox="0 0 20 20" aria-hidden="true" v-html="getItemIcon(item)">
                             </svg>
-                            <h2 class="text-xl font-semibold text-gray-900 dark:text-white text-primary-hover transition-colors">
+                            <h2
+                                class="text-xl font-semibold text-gray-900 dark:text-white text-primary-hover transition-colors">
                                 <a :href="item.type === 'chapter' ? '/chapter/' + item.id : '/doc/' + item.id"
                                     @click.prevent="navigateToItem(item)"
                                     class="stretched-link focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">
@@ -108,14 +112,16 @@ const getItemIcon = (item: DocItem) => {
                                         d="M5.5 13a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.3A4.5 4.5 0 1113.5 13H11V9.413l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13H5.5z"
                                         clip-rule="evenodd" />
                                 </svg>
-                                Created <time :datetime="formatDateISO(item.createdAt)">{{ formatDate(item.createdAt) }}</time>
+                                Created <time :datetime="formatDateISO(item.createdAt)">{{ formatDate(item.createdAt)
+                                }}</time>
                             </div>
                             <div class="flex items-center">
                                 <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                                     <path
                                         d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
                                 </svg>
-                                Updated <time :datetime="formatDateISO(item.updatedAt)">{{ formatDate(item.updatedAt) }}</time>
+                                Updated <time :datetime="formatDateISO(item.updatedAt)">{{ formatDate(item.updatedAt)
+                                }}</time>
                             </div>
                         </div>
                     </div>

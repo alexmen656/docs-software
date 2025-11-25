@@ -63,7 +63,7 @@ const getItemIcon = (item: DocItem) => {
 
 <template>
     <div v-if="currentProduct" class="min-h-full bg-gray-50 dark:bg-slate-900 lg:pr-80">
-        <div class="max-w-4xl mx-auto px-8 pt-6 pb-12">
+        <div class="max-w-4xl mx-auto px-4 sm:px-8 pt-4 sm:pt-6 pb-8 sm:pb-12">
             <div class="max-w-4xl mx-auto pt-4 pb-3">
                 <nav aria-label="Breadcrumb" class="mb-3">
                     <ol class="flex items-center space-x-3 text-sm text-gray-600 dark:text-gray-400 list-none m-0 p-0">
@@ -80,8 +80,8 @@ const getItemIcon = (item: DocItem) => {
                         <li aria-current="page" class="font-medium text-primary">{{ currentProduct.name }}</li>
                     </ol>
                 </nav>
-                <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">{{ currentProduct.name }}</h1>
-                <p class="text-gray-700 dark:text-gray-300 text-lg mb-8">{{ sortedItems.length }} Artikel</p>
+                <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">{{ currentProduct.name }}</h1>
+                <p class="text-gray-700 dark:text-gray-300 text-lg mb-6 sm:mb-8">{{ sortedItems.length }} Artikel</p>
             </div>
             <div class="space-y-4">
                 <article v-for="item in sortedItems" :key="item.id"

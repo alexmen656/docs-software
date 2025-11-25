@@ -64,10 +64,10 @@ const navigateToDoc = (docId: string) => {
                 </div>
             </div>
         </div>
-        <div class="max-w-7xl mx-auto px-8 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8 py-8 sm:py-12">
             <div v-if="hasSearchResults" class="mb-12">
                 <div v-if="filteredDocs.length > 0" class="mb-12">
-                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Documentation</h2>
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6">Documentation</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         <article v-for="doc in filteredDocs" :key="doc.id"
                             class="group relative rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-gray-400 dark:hover:border-gray-600 transition-all hover:shadow-lg p-6 bg-white dark:bg-slate-800">

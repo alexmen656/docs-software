@@ -1,11 +1,12 @@
 <template>
     <div class="min-h-full bg-gray-50 dark:bg-slate-900 lg:pr-80">
-        <div class="max-w-4xl mx-auto px-8 pt-6 pb-12">
+        <div class="max-w-4xl mx-auto px-4 sm:px-8 pt-4 sm:pt-6 pb-8 sm:pb-12">
             <div class="prose prose-sm dark:prose-invert max-w-none">
                 <div class="dark:border-gray-700 top-0 z-20">
                     <div class="max-w-4xl mx-auto py-4">
                         <nav aria-label="Breadcrumb" class="mb-4">
-                            <ol class="flex items-center space-x-3 text-sm text-gray-600 dark:text-gray-400 list-none m-0 p-0">
+                            <ol
+                                class="flex items-center space-x-3 text-sm text-gray-600 dark:text-gray-400 list-none m-0 p-0">
                                 <li>
                                     <router-link to="/" class="hover:text-gray-900 dark:hover:text-gray-200">
                                         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
@@ -28,7 +29,7 @@
                         <h1 class="text-4xl font-bold text-gray-900 dark:text-white">{{ docData?.title }}</h1>
                     </div>
                 </div>
-                <p class="text-gray-700 dark:text-gray-300 text-lg mb-8">{{ docData?.description }}</p>
+                <p class="text-gray-700 dark:text-gray-300 text-lg mb-6 sm:mb-8">{{ docData?.description }}</p>
                 <div id="section-0" class="space-y-6">
                     <div class="space-y-3">
                         <h2 id="section-1" class="text-2xl font-bold text-gray-900 dark:text-white mt-8 mb-4">

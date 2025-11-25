@@ -5,7 +5,9 @@
                 <div class="flex items-center">
                     <div class="flex-shrink-0 flex items-center logo-container"
                         @click="router.push({ name: 'landing' })" style="cursor: pointer;">
-                        <img class="logo-image" src="../assets/logo-syscom.svg" alt="Logo">
+                        <img class="logo-image"
+                            :src="darkmode ? '/src/assets/logo-syscom-dark.svg' : '/src/assets/logo-syscom.svg'"
+                            alt="Logo of SysCom" />
                     </div>
                 </div>
                 <div v-if="showSearch" class="hidden md:flex flex-1 max-w-2xl mx-8">
@@ -127,10 +129,24 @@
 import { useRouter, useRoute } from 'vue-router'
 import { ref, watch, onMounted, onUnmounted, nextTick } from 'vue'
 import { useTheme } from '@/composables/useTheme'
+useTheme().setCSSVariables("header")
 
 const router = useRouter()
 const route = useRoute()
-useTheme().setCSSVariables("header")
+const darkmode = ref(false)
+
+const updateDarkmode = () => {
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        darkmode.value = true
+    } else {
+        darkmode.value = false
+    }
+}
+
+updateDarkmode()
+
+const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+darkModeMediaQuery.addEventListener('change', updateDarkmode)
 
 interface Language {
     code: string
@@ -243,6 +259,7 @@ onMounted(() => {
 
 onUnmounted(() => {
     document.removeEventListener('click', handleClickOutside)
+    darkModeMediaQuery.removeEventListener('change', updateDarkmode)
 })
 
 const evaluateShowSearch = () => {
