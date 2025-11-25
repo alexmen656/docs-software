@@ -34,15 +34,14 @@
                             </svg>
                         </button>
                     </div>
-                    <div :id="'chapter-content-' + chapter.id" class="collapse"
+                    <div :id="'chapter-content-' + chapter.id"
                         :class="{ 'show': expandedChapters.includes(chapter.id) }" role="region"
-                        :aria-labelledby="'chapter-toggle-' + chapter.id">
+                        :aria-labelledby="'chapter-toggle-' + chapter.id"><!--class="collapse"-->
                         <ul v-show="expandedChapters.includes(chapter.id)"
                             class="ml-6 space-y-0.5 border-l-2 border-gray-200 dark:border-gray-700 pl-2 list-none m-0 p-0">
                             <li v-for="child in getChapterChildren(chapter.id)" :key="child.id">
                                 <button @click="navigateToItem(child)"
-                                    :tabindex="expandedChapters.includes(chapter.id) ? 0 : -1"
-                                    class="w-full flex items-center gap-2 px-3 py-1.5 text-left text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 rounded transition-colors">
+                                    class="w-full flex items-center gap-2 px-3 py-1.5 text-left text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 hover:underline dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 rounded transition-colors">
                                     <svg class="w-3.5 h-3.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"
                                         aria-hidden="true">
                                         <path
@@ -56,7 +55,7 @@
                 </li>
                 <li v-for="article in topLevelArticles" :key="article.id">
                     <button @click="navigateToItem(article)"
-                        class="w-full flex items-center gap-2 px-4 py-2 text-left text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors">
+                        class="w-full flex items-center gap-2 px-4 py-2 text-left text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 hover:underline dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors">
                         <svg class="w-4 h-4 flex-shrink-0 text-gray-400" fill="currentColor" viewBox="0 0 20 20"
                             aria-hidden="true">
                             <path
@@ -106,15 +105,15 @@
                             </svg>
                         </button>
                     </div>
-                    <div :id="'chapter-content-mobile-' + chapter.id" class="collapse"
+                    <div :id="'chapter-content-mobile-' + chapter.id"
                         :class="{ 'show': expandedChapters.includes(chapter.id) }" role="region"
-                        :aria-labelledby="'chapter-toggle-mobile-' + chapter.id">
+                        :aria-labelledby="'chapter-toggle-mobile-' + chapter.id"><!--class="collapse"-->
                         <ul v-show="expandedChapters.includes(chapter.id)"
                             class="ml-6 space-y-0.5 border-l-2 border-gray-200 dark:border-gray-700 pl-2 list-none m-0 p-0">
                             <li v-for="child in getChapterChildren(chapter.id)" :key="child.id">
                                 <button @click="navigateToItem(child); closeMobileMenu()"
                                     :tabindex="expandedChapters.includes(chapter.id) ? 0 : -1"
-                                    class="w-full flex items-center gap-2 px-3 py-1.5 text-left text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 rounded transition-colors">
+                                    class="w-full flex items-center gap-2 px-3 py-1.5 text-left text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 hover:underline dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 rounded transition-colors">
                                     <svg class="w-3.5 h-3.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"
                                         aria-hidden="true">
                                         <path
@@ -128,7 +127,7 @@
                 </li>
                 <li v-for="article in topLevelArticles" :key="article.id">
                     <button @click="navigateToItem(article); closeMobileMenu()"
-                        class="w-full flex items-center gap-2 px-4 py-2 text-left text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors">
+                        class="w-full flex items-center gap-2 px-4 py-2 text-left text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 hover:underline dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors">
                         <svg class="w-4 h-4 flex-shrink-0 text-gray-400" fill="currentColor" viewBox="0 0 20 20"
                             aria-hidden="true">
                             <path
