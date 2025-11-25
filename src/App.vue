@@ -34,7 +34,7 @@ const showFooter = computed(() => {
       <!--  <main :class="showSidebar ? 'ml-64 w-full main-content' : 'w-full'">
       <main class="ml-64 w-full main-content">-->
 
-      <main :class="showSidebar ? 'ml-64 w-full main-content' : 'w-full p60'">
+      <main :class="showSidebar ? 'lg:ml-64 w-full main-content' : 'w-full p60'">
         <RouterView /><!--pt-15-->
       </main>
     </div>

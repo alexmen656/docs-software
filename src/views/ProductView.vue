@@ -74,38 +74,14 @@ const getItemIcon = (item: DocItem) => {
                 <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">{{ currentProduct.name }}</h1>
                 <p class="text-gray-700 dark:text-gray-300 text-lg mb-8">{{ sortedItems.length }} Artikel</p>
             </div>
-
-            <!--   <div class="flex items-center justify-between mb-8">
-                <div>
-                    <h2 class="text-2xl font-semibold text-gray-900 dark:text-white">Dokumentationen</h2>
-                    <p class="text-gray-600 dark:text-gray-400 text-sm">{{ sortedDocs.length }} Artikel</p>
-                </div>
-                <div class="flex items-center gap-4">
-                    <span class="text-sm font-medium text-gray-600 dark:text-gray-400">Sort</span>
-                    <button @click="sortBy = 'name'" :class="[
-                        'px-3 py-1 text-sm rounded border transition-colors',
-                        sortBy === 'name'
-                            ? 'border-gray-400 bg-gray-50 dark:bg-gray-800 dark:border-gray-600 text-gray-900 dark:text-white'
-                            : 'border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-400 hover:bg-gray-50 dark:hover:bg-gray-800'
-                    ]">
-                        Name
-                    </button>
-                    <button @click="sortBy = 'recent'"
-                        class="p-1 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                        </svg>
-                    </button>
-                </div>
-            </div>-->
-
             <div class="space-y-4">
                 <div v-for="item in sortedItems" :key="item.id" @click="navigateToItem(item)"
                     class="group cursor-pointer flex items-start gap-6 p-6 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-gray-400 dark:hover:border-gray-600 transition-all hover:shadow-lg bg-white dark:bg-slate-800">
                     <div class="flex-1 min-w-0">
                         <div class="flex items-center gap-2 mb-2">
-                            <svg class="w-5 h-5" :class="item.type === 'chapter' ? 'text-primary' : 'text-gray-500 dark:text-gray-400'" fill="currentColor" viewBox="0 0 20 20" v-html="getItemIcon(item)">
+                            <svg class="w-5 h-5"
+                                :class="item.type === 'chapter' ? 'text-primary' : 'text-gray-500 dark:text-gray-400'"
+                                fill="currentColor" viewBox="0 0 20 20" v-html="getItemIcon(item)">
                             </svg>
                             <h3
                                 class="text-xl font-semibold text-gray-900 dark:text-white text-primary-hover transition-colors">
@@ -137,32 +113,34 @@ const getItemIcon = (item: DocItem) => {
             </div>
         </div>
     </div>
-
-    <div
+    <aside
         class="hidden lg:flex fixed right-0 top-0 w-80 h-screen bg-gray-50 dark:bg-slate-900 border-l border-gray-200 dark:border-gray-700 px-6 py-10 flex-col overflow-y-auto p60">
         <div v-if="currentProduct" class="space-y-6">
             <div>
-                <h3 class="text-sm font-semibold uppercase mb-3 text-primary">
+                <h2 class="text-sm font-semibold uppercase mb-3 text-primary">
                     {{ currentProduct.name }}
-                </h3>
+                </h2>
                 <p class="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
                     {{ currentProduct.description }}
                 </p>
             </div>
-
             <div class="border-t border-gray-200 dark:border-gray-700 pt-6">
                 <h3 class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
                     Inhalte ({{ sortedItems.length }})
                 </h3>
-                <nav class="space-y-2">
-                    <a v-for="item in sortedItems" :key="item.id" @click="navigateToItem(item)"
-                        class="block text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors cursor-pointer">
-                        {{ item.title }}
-                    </a>
+                <nav aria-label="Product contents">
+                    <ul class="space-y-2 list-none m-0 p-0">
+                        <li v-for="item in sortedItems" :key="item.id">
+                            <a @click="navigateToItem(item)"
+                                class="block text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors cursor-pointer">
+                                {{ item.title }}
+                            </a>
+                        </li>
+                    </ul>
                 </nav>
             </div>
         </div>
-    </div>
+    </aside>
 </template>
 
 <style scoped>

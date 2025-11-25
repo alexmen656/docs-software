@@ -108,9 +108,8 @@
                     <span
                         class="text-sm font-medium text-gray-600 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-gray-200 mb-2">«
                         Previous</span>
-                    <span
-                        class="text-lg font-semibold text-primary text-primary-hover">{{
-                            previousDoc?.title }}</span>
+                    <span class="text-lg font-semibold text-primary text-primary-hover">{{
+                        previousDoc?.title }}</span>
                 </router-link>
                 <div v-else></div>
                 <router-link v-if="nextDoc" :to="{ name: 'doc', params: { id: nextDoc.id } }"
@@ -118,147 +117,188 @@
                     <span
                         class="text-sm font-medium text-gray-600 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-gray-200 mb-2">Next
                         »</span>
-                    <span
-                        class="text-lg font-semibold text-primary text-primary-hover">{{
-                            nextDoc?.title }}</span>
+                    <span class="text-lg font-semibold text-primary text-primary-hover">{{
+                        nextDoc?.title }}</span>
                 </router-link>
             </div>
         </div>
     </div>
-    <div
+    <aside
         class="hidden lg:flex fixed right-0 top-0 w-80 h-screen bg-gray-50 dark:bg-slate-900 border-l border-gray-200 dark:border-gray-700 px-6 py-10 flex-col overflow-y-auto p60">
-        <div class="space-y-6">
-            <div>
-                <h3 class="text-sm font-semibold uppercase mb-3 text-primary">
-                    Overview
-                </h3>
-                <nav class="space-y-2">
-                    <a href="#section-0"
-                        class="block text-sm text-gray-700 dark:text-gray-300 transition-colors font-medium text-primary-hover">
-                        {{ docData?.title }}
-                    </a>
-                    <a href="#section-1"
-                        class="block text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors ml-3">
-                        Service Architecture
-                    </a>
-                    <a href="#subsection-0-0"
-                        class="block text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors ml-6">
-                        Service Types
-                    </a>
-                    <a href="#subsection-0-1"
-                        class="block text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors ml-6">
-                        API Services
-                    </a>
-                </nav>
-            </div>
-            <div>
-                <h3 class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
-                    Creating Services
-                </h3>
-                <nav class="space-y-2">
-                    <a href="#subsection-1-0"
-                        class="block text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors ml-3">
-                        Service Creation Process
-                    </a>
-                    <a href="#subsection-1-1"
-                        class="block text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors ml-3">
-                        Service Templates
-                    </a>
-                </nav>
-            </div>
-            <div>
-                <h3 class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
-                    Service Management
-                </h3>
-                <nav class="space-y-2">
-                    <a href="#subsection-2-0"
-                        class="block text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors ml-3">
-                        Service Lifecycle
-                    </a>
-                    <a href="#subsection-2-1"
-                        class="block text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors ml-3">
-                        Service Configuration
-                    </a>
-                    <a href="#subsection-2-2"
-                        class="block text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors ml-3">
-                        Service Monitoring
-                    </a>
-                </nav>
-            </div>
-            <div>
-                <h3 class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
-                    Service Integration
-                </h3>
-                <nav class="space-y-2">
-                    <a href="#subsection-3-0"
-                        class="block text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors ml-3">
-                        Database Integration
-                    </a>
-                    <a href="#subsection-3-1"
-                        class="block text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors ml-3">
-                        External API Integration
-                    </a>
-                    <a href="#subsection-3-2"
-                        class="block text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors ml-3">
-                        Event System
-                    </a>
-                </nav>
-            </div>
-            <div>
-                <h3 class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
-                    Service Security
-                </h3>
-                <nav class="space-y-2">
-                    <a href="#subsection-4-0"
-                        class="block text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors ml-3">
-                        Authentication & Authorization
-                    </a>
-                    <a href="#subsection-4-1"
-                        class="block text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors ml-3">
-                        Input Validation
-                    </a>
-                    <a href="#subsection-4-2"
-                        class="block text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors ml-3">
-                        Security Headers
-                    </a>
-                </nav>
-            </div>
-            <div>
-                <h3 class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
-                    Service Testing
-                </h3>
-                <nav class="space-y-2">
-                    <a href="#subsection-5-0"
-                        class="block text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors ml-3">
-                        Unit Testing
-                    </a>
-                    <a href="#subsection-5-1"
-                        class="block text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors ml-3">
-                        Integration Testing
-                    </a>
-                    <a href="#subsection-5-2"
-                        class="block text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors ml-3">
-                        Load Testing
-                    </a>
-                </nav>
-            </div>
-            <div>
-                <h3 class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
-                    Service Deployment
-                </h3>
-                <nav class="space-y-2">
-                    <a href="#subsection-6-0"
-                        class="block text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors ml-3">
-                        Deployment Strategies
-                    </a>
-                    <a href="#subsection-6-1"
-                        class="block text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors ml-3">
-                        CI/CD Pipeline
-                    </a>
-                </nav>
-            </div>
-        </div>
-    </div>
+        <nav aria-label="Table of contents">
+            <ul class="space-y-6 list-none m-0 p-0">
+                <li>
+                    <h2 class="text-sm font-semibold uppercase mb-3 text-primary">
+                        Overview
+                    </h2>
+                    <ul class="space-y-2 list-none m-0 p-0">
+                        <li>
+                            <a href="#section-0"
+                                class="block text-sm text-gray-700 dark:text-gray-300 transition-colors font-medium text-primary-hover">
+                                {{ docData?.title }}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#section-1"
+                                class="block text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors ml-3">
+                                Service Architecture
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#subsection-0-0"
+                                class="block text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors ml-6">
+                                Service Types
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#subsection-0-1"
+                                class="block text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors ml-6">
+                                API Services
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <h2 class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
+                        Creating Services
+                    </h2>
+                    <ul class="space-y-2 list-none m-0 p-0">
+                        <li>
+                            <a href="#subsection-1-0"
+                                class="block text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors ml-3">
+                                Service Creation Process
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#subsection-1-1"
+                                class="block text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors ml-3">
+                                Service Templates
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <h2 class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
+                        Service Management
+                    </h2>
+                    <ul class="space-y-2 list-none m-0 p-0">
+                        <li>
+                            <a href="#subsection-2-0"
+                                class="block text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors ml-3">
+                                Service Lifecycle
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#subsection-2-1"
+                                class="block text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors ml-3">
+                                Service Configuration
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#subsection-2-2"
+                                class="block text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors ml-3">
+                                Service Monitoring
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <h2 class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
+                        Service Integration
+                    </h2>
+                    <ul class="space-y-2 list-none m-0 p-0">
+                        <li>
+                            <a href="#subsection-3-0"
+                                class="block text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors ml-3">
+                                Database Integration
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#subsection-3-1"
+                                class="block text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors ml-3">
+                                External API Integrations
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#subsection-3-2"
+                                class="block text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors ml-3">
+                                Event System
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <h2 class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
+                        Service Security
+                    </h2>
+                    <ul class="space-y-2 list-none m-0 p-0">
+                        <li>
+                            <a href="#subsection-4-0"
+                                class="block text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors ml-3">
+                                Authentication & Authorization
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#subsection-4-1"
+                                class="block text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors ml-3">
+                                Input Validation
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#subsection-4-2"
+                                class="block text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors ml-3">
+                                Security Headers
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <h2 class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
+                        Service Testing
+                    </h2>
+                    <ul class="space-y-2 list-none m-0 p-0">
+                        <li>
+                            <a href="#subsection-5-0"
+                                class="block text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors ml-3">
+                                Unit Testing
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#subsection-5-1"
+                                class="block text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors ml-3">
+                                Integration Testing
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#subsection-5-2"
+                                class="block text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors ml-3">
+                                Load Testing
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <h2 class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
+                        Service Deployment
+                    </h2>
+                    <ul class="space-y-2 list-none m-0 p-0">
+                        <li>
+                            <a href="#subsection-6-0"
+                                class="block text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors ml-3">
+                                Deployment Strategies
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#subsection-6-1"
+                                class="block text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors ml-3">
+                                CI/CD Pipeline
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </aside>
 </template>
 
 <script setup lang="ts">

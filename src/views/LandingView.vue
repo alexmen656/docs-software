@@ -6,9 +6,8 @@ import type { Product } from '@/types'
 import { useTheme } from '@/composables/useTheme'
 
 const router = useRouter()
-const { setCSSVariables } = useTheme()
+useTheme().setCSSVariables("landing")
 
-setCSSVariables()
 const productList = ref<Product[]>(products)
 const searchQuery = ref('')
 
@@ -52,12 +51,14 @@ const navigateToDoc = (docId: string) => {
                 <h1 class="text-5xl font-bold text-gray-900 text-white dark:text-white mb-8">Knowledge Hub</h1>
                 <div class="relative">
                     <div class="relative">
+                        <label for="landing-search" class="sr-only">Search documentation</label>
                         <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none"
-                            stroke="currentColor" viewBox="0 0 24 24">
+                            stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
-                        <input v-model="searchQuery" type="text" placeholder="Search documentation..."
+                        <input id="landing-search" v-model="searchQuery" type="text"
+                            placeholder="Search documentation..."
                             class="w-full pl-12 pr-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus-ring-primary" />
                     </div>
                 </div>
@@ -68,29 +69,34 @@ const navigateToDoc = (docId: string) => {
                 <div v-if="filteredDocs.length > 0" class="mb-12">
                     <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Documentation</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <div v-for="doc in filteredDocs" :key="doc.id" @click="navigateToDoc(doc.id)"
-                            class="group cursor-pointer rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-gray-400 dark:hover:border-gray-600 transition-all hover:shadow-lg p-6">
-                            <h3
-                                class="text-lg font-semibold text-gray-900 dark:text-white mb-2 text-primary-hover transition-colors">
-                                {{ doc.title }}
+                        <article v-for="doc in filteredDocs" :key="doc.id"
+                            class="group relative rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-gray-400 dark:hover:border-gray-600 transition-all hover:shadow-lg p-6 bg-white dark:bg-slate-800">
+                            <h3 class="text-lg font-semibold mb-2">
+                                <a :href="'/doc/' + doc.id" @click.prevent="navigateToDoc(doc.id)"
+                                    class="text-gray-900 dark:text-white hover:underline focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 stretched-link">
+                                    {{ doc.title }}
+                                </a>
                             </h3>
                             <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">
                                 {{ doc.description }}
                             </p>
-                        </div>
+                        </article>
                     </div>
                 </div>
                 <div v-if="filteredProducts.length > 0" class="mb-12">
                     <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Products</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <div v-for="product in filteredProducts" :key="product.id"
-                            @click="navigateToProduct(product.slug)"
-                            class="cursor-pointer rounded-lg transition-all shadow-sm hover:shadow-md p-6 bg-white dark:bg-slate-800">
+                        <article v-for="product in filteredProducts" :key="product.id"
+                            class="relative rounded-lg transition-all shadow-sm hover:shadow-md p-6 bg-white dark:bg-slate-800">
                             <div class="flex items-center gap-3 mb-4">
-                                <img height="36" width="36" :src="product.logo" :alt="'Logo of ' + product.name"
-                                    class="flex-shrink-0" />
-                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
-                                    {{ product.name }}
+                                <img height="36" width="36" :src="product.logo" alt="" class="flex-shrink-0"
+                                    aria-hidden="true" />
+                                <h3 class="text-lg font-semibold">
+                                    <a :href="'/product/' + product.slug"
+                                        @click.prevent="navigateToProduct(product.slug)"
+                                        class="text-gray-900 dark:text-white hover:underline focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 stretched-link">
+                                        {{ product.name }}
+                                    </a>
                                 </h3>
                             </div>
                             <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 break-words">
@@ -104,20 +110,23 @@ const navigateToDoc = (docId: string) => {
                                     Sections
                                 </p>
                             </div>
-                        </div>
+                        </article>
                     </div>
                 </div>
             </div>
             <div v-else>
                 <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Produkte</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <div v-for="product in productList" :key="product.id" @click="navigateToProduct(product.slug)"
-                        class="cursor-pointer rounded-lg transition-all shadow-sm hover:shadow-md p-6 bg-white dark:bg-slate-800">
+                    <article v-for="product in productList" :key="product.id"
+                        class="relative rounded-lg transition-all shadow-sm hover:shadow-md p-6 bg-white dark:bg-slate-800">
                         <div class="flex items-center gap-3 mb-4">
-                            <img height="42" width="42" :src="product.logo" :alt="'Logo of ' + product.name"
-                                class="flex-shrink-0" />
-                            <h3 class="text-2xl font-semibold text-gray-900 dark:text-white">
-                                {{ product.name }}
+                            <img height="42" width="42" :src="product.logo" alt="" class="flex-shrink-0"
+                                aria-hidden="true" />
+                            <h3 class="text-2xl font-semibold">
+                                <a :href="'/product/' + product.slug" @click.prevent="navigateToProduct(product.slug)"
+                                    class="text-gray-900 dark:text-white hover:underline focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 stretched-link">
+                                    {{ product.name }}
+                                </a>
                             </h3>
                         </div>
                         <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 break-words">
@@ -132,7 +141,7 @@ const navigateToDoc = (docId: string) => {
                                 Sections
                             </p>
                         </div>
-                    </div>
+                    </article>
                 </div>
             </div>
         </div>
@@ -140,6 +149,28 @@ const navigateToDoc = (docId: string) => {
 </template>
 
 <style scoped>
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+.stretched-link::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    content: "";
+}
+
 .line-clamp-2 {
     display: -webkit-box;
     -webkit-line-clamp: 2;

@@ -112,13 +112,13 @@ const getItemIcon = (item: DocItem) => {
         </div>
     </div>
 
-    <div
+    <aside
         class="hidden lg:flex fixed right-0 top-0 w-80 h-screen bg-gray-50 dark:bg-slate-900 border-l border-gray-200 dark:border-gray-700 px-6 py-10 flex-col overflow-y-auto p60">
         <div v-if="currentChapter" class="space-y-6">
             <div>
-                <h3 class="text-sm font-semibold uppercase mb-3 text-primary">
+                <h2 class="text-sm font-semibold uppercase mb-3 text-primary">
                     {{ currentChapter.title }}
-                </h3>
+                </h2>
                 <p class="text-sm text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
                     {{ currentChapter.description }}
                 </p>
@@ -128,15 +128,19 @@ const getItemIcon = (item: DocItem) => {
                 <h3 class="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">
                     Inhalte ({{ sortedItems.length }})
                 </h3>
-                <nav class="space-y-2">
-                    <a v-for="item in sortedItems" :key="item.id" @click="navigateToItem(item)"
-                        class="block text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors cursor-pointer">
-                        {{ item.title }}
-                    </a>
+                <nav aria-label="Chapter contents">
+                    <ul class="space-y-2 list-none m-0 p-0">
+                        <li v-for="item in sortedItems" :key="item.id">
+                            <a @click="navigateToItem(item)"
+                                class="block text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 transition-colors cursor-pointer">
+                                {{ item.title }}
+                            </a>
+                        </li>
+                    </ul>
                 </nav>
             </div>
         </div>
-    </div>
+    </aside>
 </template>
 
 <style scoped>
