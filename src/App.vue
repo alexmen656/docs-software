@@ -7,15 +7,10 @@ import AppFooter from './components/AppFooter.vue'
 import { useTheme } from './composables/useTheme'
 
 const route = useRoute()
-const { setCSSVariables } = useTheme()
 
 onMounted(() => {
-  setCSSVariables()
+  useTheme().setCSSVariables()
 })
-
-/*const showHeader = computed(() => {
-  return !['landing', 'login', 'signup'].includes(route.name as string)
-})*/
 
 const showSidebar = computed(() => {
   return !['landing', 'login', 'signup'].includes(route.name as string)
@@ -28,14 +23,11 @@ const showFooter = computed(() => {
 
 <template>
   <div id="app" class="min-h-screen" :class="showSidebar ? 'app-with-sidebar' : 'bg-gray-50 dark:bg-gray-900'">
-    <AppHeader /><!--v-if="showHeader" -->
+    <AppHeader />
     <div class="flex h-full">
       <AppSidebar v-if="showSidebar" />
-      <!--  <main :class="showSidebar ? 'ml-64 w-full main-content' : 'w-full'">
-      <main class="ml-64 w-full main-content">-->
-
       <main :class="showSidebar ? 'lg:ml-64 w-full main-content' : 'w-full p60'">
-        <RouterView /><!--pt-15-->
+        <RouterView />
       </main>
     </div>
     <AppFooter v-if="showFooter"></AppFooter>

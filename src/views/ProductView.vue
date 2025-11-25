@@ -7,13 +7,11 @@ import type { DocItem } from '@/types'
 
 const route = useRoute()
 const router = useRouter()
-const { setCSSVariables } = useTheme()
 
-setCSSVariables()
-
-const sortBy = ref<'name' | 'recent'>('recent')
+useTheme().setCSSVariables()
 
 const slug = route.params.slug as string
+const sortBy = ref<'name' | 'recent'>('recent')
 const currentProduct = computed(() => products.find(p => p.slug === slug))
 
 const productItems = computed(() => {
