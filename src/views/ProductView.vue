@@ -41,6 +41,10 @@ const formatDate = (date: Date) => {
     return date.toLocaleDateString()
 }
 
+const formatDateISO = (date: Date) => {
+    return new Date(date).toISOString().split('T')[0]
+}
+
 const navigateToItem = (item: DocItem) => {
     if (item.type === 'chapter') {
         router.push({ name: 'chapter', params: { id: item.id } })
@@ -61,55 +65,63 @@ const getItemIcon = (item: DocItem) => {
     <div v-if="currentProduct" class="min-h-full bg-gray-50 dark:bg-slate-900 lg:pr-80">
         <div class="max-w-4xl mx-auto px-8 pt-6 pb-12">
             <div class="max-w-4xl mx-auto pt-4 pb-3">
-                <nav class="flex items-center space-x-3 text-sm text-gray-600 dark:text-gray-400 mb-3"><!--mb-4-->
-                    <router-link to="/" class="hover:text-gray-900 dark:hover:text-gray-200">
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                            <path
-                                d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
-                        </svg>
-                    </router-link>
-                    <span>›</span>
-                    <span class="font-medium text-primary">{{ currentProduct.name }}</span>
+                <nav aria-label="Breadcrumb" class="mb-3">
+                    <ol class="flex items-center space-x-3 text-sm text-gray-600 dark:text-gray-400 list-none m-0 p-0">
+                        <li>
+                            <router-link to="/" class="hover:text-gray-900 dark:hover:text-gray-200">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                                    <path
+                                        d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+                                </svg>
+                                <span class="sr-only">Home</span>
+                            </router-link>
+                        </li>
+                        <li aria-hidden="true">›</li>
+                        <li aria-current="page" class="font-medium text-primary">{{ currentProduct.name }}</li>
+                    </ol>
                 </nav>
                 <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">{{ currentProduct.name }}</h1>
                 <p class="text-gray-700 dark:text-gray-300 text-lg mb-8">{{ sortedItems.length }} Artikel</p>
             </div>
             <div class="space-y-4">
-                <div v-for="item in sortedItems" :key="item.id" @click="navigateToItem(item)"
-                    class="group cursor-pointer flex items-start gap-6 p-6 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-gray-400 dark:hover:border-gray-600 transition-all hover:shadow-lg bg-white dark:bg-slate-800">
+                <article v-for="item in sortedItems" :key="item.id"
+                    class="group relative flex items-start gap-6 p-6 border border-gray-200 dark:border-gray-700 rounded-lg hover:border-gray-400 dark:hover:border-gray-600 transition-all hover:shadow-lg bg-white dark:bg-slate-800">
                     <div class="flex-1 min-w-0">
                         <div class="flex items-center gap-2 mb-2">
                             <svg class="w-5 h-5"
                                 :class="item.type === 'chapter' ? 'text-primary' : 'text-gray-500 dark:text-gray-400'"
-                                fill="currentColor" viewBox="0 0 20 20" v-html="getItemIcon(item)">
+                                fill="currentColor" viewBox="0 0 20 20" aria-hidden="true" v-html="getItemIcon(item)">
                             </svg>
-                            <h3
-                                class="text-xl font-semibold text-gray-900 dark:text-white text-primary-hover transition-colors">
-                                {{ item.title }}
-                            </h3>
+                            <h2 class="text-xl font-semibold text-gray-900 dark:text-white text-primary-hover transition-colors">
+                                <a :href="item.type === 'chapter' ? '/chapter/' + item.id : '/doc/' + item.id"
+                                    @click.prevent="navigateToItem(item)"
+                                    class="stretched-link focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">
+                                    {{ item.title }}
+                                </a>
+                            </h2>
                         </div>
                         <p class="text-sm text-gray-600 dark:text-gray-400 mb-4 line-clamp-2">
                             {{ item.description }}
                         </p>
                         <div class="flex items-center gap-6 text-xs text-gray-500 dark:text-gray-400">
                             <div class="flex items-center">
-                                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                                     <path fill-rule="evenodd"
                                         d="M5.5 13a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.3A4.5 4.5 0 1113.5 13H11V9.413l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13H5.5z"
                                         clip-rule="evenodd" />
                                 </svg>
-                                Created {{ formatDate(item.createdAt) }}
+                                Created <time :datetime="formatDateISO(item.createdAt)">{{ formatDate(item.createdAt) }}</time>
                             </div>
                             <div class="flex items-center">
-                                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                                     <path
                                         d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
                                 </svg>
-                                Updated {{ formatDate(item.updatedAt) }}
+                                Updated <time :datetime="formatDateISO(item.updatedAt)">{{ formatDate(item.updatedAt) }}</time>
                             </div>
                         </div>
                     </div>
-                </div>
+                </article>
             </div>
         </div>
     </div>
@@ -150,6 +162,28 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+.stretched-link::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+    content: "";
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
 }
 
 .line-clamp-2 {

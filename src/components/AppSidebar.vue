@@ -20,10 +20,12 @@
                             </svg>
                             <span class="font-medium">{{ chapter.title }}</span>
                         </button>
-                        <button @click="toggleChapter(chapter.id)"
+                        <button @click="toggleChapter(chapter.id)" @keydown.enter.prevent="toggleChapter(chapter.id)"
+                            @keydown.space.prevent="toggleChapter(chapter.id)"
                             :aria-expanded="expandedChapters.includes(chapter.id)"
                             :aria-controls="'chapter-content-' + chapter.id"
                             :aria-label="expandedChapters.includes(chapter.id) ? 'Collapse ' + chapter.title : 'Expand ' + chapter.title"
+                            data-bs-toggle="collapse"
                             class="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors mr-2">
                             <svg :class="['w-3.5 h-3.5 text-gray-500 dark:text-gray-400 transition-transform', expandedChapters.includes(chapter.id) ? 'rotate-180' : '']"
                                 fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -32,20 +34,25 @@
                             </svg>
                         </button>
                     </div>
-                    <ul v-show="expandedChapters.includes(chapter.id)" :id="'chapter-content-' + chapter.id"
-                        class="ml-6 space-y-0.5 border-l-2 border-gray-200 dark:border-gray-700 pl-2 list-none m-0 p-0">
-                        <li v-for="child in getChapterChildren(chapter.id)" :key="child.id">
-                            <button @click="navigateToItem(child)"
-                                class="w-full flex items-center gap-2 px-3 py-1.5 text-left text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 rounded transition-colors">
-                                <svg class="w-3.5 h-3.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"
-                                    aria-hidden="true">
-                                    <path
-                                        d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.414l4 4A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" />
-                                </svg>
-                                <span>{{ child.title }}</span>
-                            </button>
-                        </li>
-                    </ul>
+                    <div :id="'chapter-content-' + chapter.id" class="collapse"
+                        :class="{ 'show': expandedChapters.includes(chapter.id) }" role="region"
+                        :aria-labelledby="'chapter-toggle-' + chapter.id">
+                        <ul v-show="expandedChapters.includes(chapter.id)"
+                            class="ml-6 space-y-0.5 border-l-2 border-gray-200 dark:border-gray-700 pl-2 list-none m-0 p-0">
+                            <li v-for="child in getChapterChildren(chapter.id)" :key="child.id">
+                                <button @click="navigateToItem(child)"
+                                    :tabindex="expandedChapters.includes(chapter.id) ? 0 : -1"
+                                    class="w-full flex items-center gap-2 px-3 py-1.5 text-left text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 rounded transition-colors">
+                                    <svg class="w-3.5 h-3.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"
+                                        aria-hidden="true">
+                                        <path
+                                            d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.414l4 4A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" />
+                                    </svg>
+                                    <span>{{ child.title }}</span>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
                 <li v-for="article in topLevelArticles" :key="article.id">
                     <button @click="navigateToItem(article)"
@@ -61,8 +68,6 @@
             </ul>
         </nav>
     </div>
-
-    <!-- Mobile Sidebar -->
     <div v-if="isMobileMenuOpen" class="lg:hidden fixed inset-0 top-15 z-40 bg-black/50 dark:bg-black/70"
         @click="closeMobileMenu"></div>
     <div v-show="isMobileMenuOpen"
@@ -87,10 +92,12 @@
                             </svg>
                             <span class="font-medium">{{ chapter.title }}</span>
                         </button>
-                        <button @click="toggleChapter(chapter.id)"
+                        <button @click="toggleChapter(chapter.id)" @keydown.enter.prevent="toggleChapter(chapter.id)"
+                            @keydown.space.prevent="toggleChapter(chapter.id)"
                             :aria-expanded="expandedChapters.includes(chapter.id)"
                             :aria-controls="'chapter-content-mobile-' + chapter.id"
                             :aria-label="expandedChapters.includes(chapter.id) ? 'Collapse ' + chapter.title : 'Expand ' + chapter.title"
+                            data-bs-toggle="collapse"
                             class="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors mr-2">
                             <svg :class="['w-3.5 h-3.5 text-gray-500 dark:text-gray-400 transition-transform', expandedChapters.includes(chapter.id) ? 'rotate-180' : '']"
                                 fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -99,20 +106,25 @@
                             </svg>
                         </button>
                     </div>
-                    <ul v-show="expandedChapters.includes(chapter.id)" :id="'chapter-content-mobile-' + chapter.id"
-                        class="ml-6 space-y-0.5 border-l-2 border-gray-200 dark:border-gray-700 pl-2 list-none m-0 p-0">
-                        <li v-for="child in getChapterChildren(chapter.id)" :key="child.id">
-                            <button @click="navigateToItem(child); closeMobileMenu()"
-                                class="w-full flex items-center gap-2 px-3 py-1.5 text-left text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 rounded transition-colors">
-                                <svg class="w-3.5 h-3.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"
-                                    aria-hidden="true">
-                                    <path
-                                        d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.414l4 4A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" />
-                                </svg>
-                                <span>{{ child.title }}</span>
-                            </button>
-                        </li>
-                    </ul>
+                    <div :id="'chapter-content-mobile-' + chapter.id" class="collapse"
+                        :class="{ 'show': expandedChapters.includes(chapter.id) }" role="region"
+                        :aria-labelledby="'chapter-toggle-mobile-' + chapter.id">
+                        <ul v-show="expandedChapters.includes(chapter.id)"
+                            class="ml-6 space-y-0.5 border-l-2 border-gray-200 dark:border-gray-700 pl-2 list-none m-0 p-0">
+                            <li v-for="child in getChapterChildren(chapter.id)" :key="child.id">
+                                <button @click="navigateToItem(child); closeMobileMenu()"
+                                    :tabindex="expandedChapters.includes(chapter.id) ? 0 : -1"
+                                    class="w-full flex items-center gap-2 px-3 py-1.5 text-left text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-700 rounded transition-colors">
+                                    <svg class="w-3.5 h-3.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"
+                                        aria-hidden="true">
+                                        <path
+                                            d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.414l4 4A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" />
+                                    </svg>
+                                    <span>{{ child.title }}</span>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
                 </li>
                 <li v-for="article in topLevelArticles" :key="article.id">
                     <button @click="navigateToItem(article); closeMobileMenu()"

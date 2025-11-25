@@ -4,19 +4,26 @@
             <div class="prose prose-sm dark:prose-invert max-w-none">
                 <div class="dark:border-gray-700 top-0 z-20">
                     <div class="max-w-4xl mx-auto py-4">
-                        <nav class="flex items-center space-x-3 text-sm text-gray-600 dark:text-gray-400 mb-4">
-                            <router-link to="/" class="hover:text-gray-900 dark:hover:text-gray-200">
-                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                                    <path
-                                        d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
-                                </svg>
-                            </router-link>
-                            <span>›</span>
-                            <router-link to="/" class="hover:text-gray-900 dark:hover:text-gray-200">
-                                Core Features
-                            </router-link>
-                            <span>›</span>
-                            <span class="font-medium text-primary">{{ docData?.title }}</span>
+                        <nav aria-label="Breadcrumb" class="mb-4">
+                            <ol class="flex items-center space-x-3 text-sm text-gray-600 dark:text-gray-400 list-none m-0 p-0">
+                                <li>
+                                    <router-link to="/" class="hover:text-gray-900 dark:hover:text-gray-200">
+                                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                                            <path
+                                                d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
+                                        </svg>
+                                        <span class="sr-only">Home</span>
+                                    </router-link>
+                                </li>
+                                <li aria-hidden="true">›</li>
+                                <li>
+                                    <router-link to="/" class="hover:text-gray-900 dark:hover:text-gray-200">
+                                        Core Features
+                                    </router-link>
+                                </li>
+                                <li aria-hidden="true">›</li>
+                                <li aria-current="page" class="font-medium text-primary">{{ docData?.title }}</li>
+                            </ol>
                         </nav>
                         <h1 class="text-4xl font-bold text-gray-900 dark:text-white">{{ docData?.title }}</h1>
                     </div>
@@ -345,6 +352,18 @@ a {
 
 a:hover {
     text-decoration: underline;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
 }
 
 .p60 {
