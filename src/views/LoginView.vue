@@ -3,7 +3,8 @@
         <div class="max-w-md w-full">
             <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 sm:p-10 space-y-8">
                 <div class="flex justify-center">
-                    <img src="../assets/logo-syscom.svg" alt="SysCom Logo" class="h-12 w-auto">
+                    <img :src="darkmode ? '/src/assets/logo-syscom-dark.svg' : '/src/assets/logo-syscom.svg'"
+                        alt="SysCom Logo" class="h-12 w-auto">
                 </div>
                 <div class="text-center">
                     <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white">
@@ -31,16 +32,15 @@
                             placeholder="••••••••">
                     </div>
                     <div class="flex items-center justify-between">
-                        <div class="flex items-center">
+                        <!--<div class="flex items-center">
                             <input id="remember-me" v-model="rememberMe" name="remember-me" type="checkbox"
                                 class="h-4 w-4 border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-primary focus-ring-primary">
                             <label for="remember-me" class="ml-2 block text-sm text-gray-700 dark:text-gray-300">
                                 Remember me
                             </label>
-                        </div>
+                        </div>-->
                         <div class="text-sm">
-                            <a href="#"
-                                class="font-medium transition-colors text-primary text-primary-hover">
+                            <a href="#" class="font-medium transition-colors text-primary text-primary-hover">
                                 Forgot password?
                             </a>
                         </div>
@@ -61,8 +61,7 @@
                 <div class="text-center pt-4 border-t border-gray-200 dark:border-gray-700">
                     <p class="text-sm text-gray-600 dark:text-gray-400">
                         Don't have an account?
-                        <router-link to="/signup"
-                            class="font-medium transition-colors text-primary text-primary-hover">
+                        <router-link to="/signup" class="font-medium transition-colors text-primary text-primary-hover">
                             Sign up
                         </router-link>
                     </p>
@@ -76,6 +75,7 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useTheme } from '@/composables/useTheme'
+import { useAuthStore } from '@/stores/auth'
 
 const router = useRouter()
 const { setCSSVariables } = useTheme()
@@ -84,19 +84,32 @@ setCSSVariables()
 
 const username = ref('')
 const password = ref('')
-const rememberMe = ref(false)
+//const rememberMe = ref(false)
 const isLoading = ref(false)
+const darkmode = ref(false)
+
+const updateDarkmode = () => {
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        darkmode.value = true
+    } else {
+        darkmode.value = false
+    }
+}
+
+updateDarkmode()
+
+const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+darkModeMediaQuery.addEventListener('change', updateDarkmode)
 
 const handleLogin = async () => {
     isLoading.value = true;
 
     try {
-        await new Promise(resolve => setTimeout(resolve, 1000));
-        const success = true;
+        const success = await useAuthStore().login(username.value, password.value);
 
-        if (success) {
-            router.push('/dashboard')
-        }
+        /* if (success) {
+             router.push('/dashboard')
+         }*/
     } finally {
         isLoading.value = false;
     }
