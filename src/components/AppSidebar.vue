@@ -141,12 +141,13 @@
     </div>
 </template>
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useTheme } from '@/composables/useTheme'
 import { useMobileMenu } from '@/composables/useMobileMenu'
-import { products, allDocItems } from '@/demo-data/docs'
-import type { DocItem } from '@/types'
+import { productsService } from '@/services/productsService'
+import { docsService } from '@/services/docsService'
+import type { DocItem, Product } from '@/types'
 
 const route = useRoute()
 const router = useRouter()
@@ -154,18 +155,42 @@ const { isMobileMenuOpen, closeMobileMenu } = useMobileMenu()
 useTheme().setCSSVariables("sidebar")
 
 const expandedChapters = ref<string[]>([])
+const products = ref<Product[]>([])
+const allDocItems = ref<DocItem[]>([])
+const isLoading = ref(false)
+
 const slug = computed(() => route.params.slug as string)
 const chapterId = computed(() => route.params.id as string)
 
+const loadData = async () => {
+    isLoading.value = true
+    try {
+        const [productList, docItems] = await Promise.all([
+            productsService.getAllProducts(),
+            docsService.getAllDocItems(),
+        ])
+        products.value = productList
+        allDocItems.value = docItems
+    } catch (error) {
+        console.error('Error loading sidebar data:', error)
+    } finally {
+        isLoading.value = false
+    }
+}
+
+onMounted(() => {
+    loadData()
+})
+
 const currentProduct = computed(() => {
     if (slug.value) {
-        return products.find(p => p.slug === slug.value)
+        return products.value.find(p => p.slug === slug.value)
     }
 
     if (chapterId.value) {
-        const chapter = allDocItems.find(item => item.id === chapterId.value)
+        const chapter = allDocItems.value.find(item => item.id === chapterId.value)
         if (chapter) {
-            return products.find(p => p.id === chapter.productId)
+            return products.value.find(p => p.id === chapter.productId)
         }
     }
     return undefined
@@ -174,7 +199,7 @@ const currentProduct = computed(() => {
 const productItems = computed(() => {
     const productId = currentProduct.value?.id
     if (!productId) return []
-    return allDocItems.filter(item => item.productId === productId && !item.parentId)
+    return allDocItems.value.filter(item => item.productId === productId && !item.parentId)
 })
 
 const topLevelChapters = computed(() => productItems.value.filter(item => item.type === 'chapter'))
@@ -190,7 +215,7 @@ const toggleChapter = (chapterId: string) => {
 }
 
 const getChapterChildren = (chapterId: string) => {
-    return allDocItems.filter(item => item.parentId === chapterId)
+    return allDocItems.value.filter(item => item.parentId === chapterId)
 }
 
 const navigateToItem = (item: DocItem) => {
