@@ -143,7 +143,7 @@ const getItemIcon = (item: DocItem) => {
                                         clip-rule="evenodd" />
                                 </svg>
                                 Created <time :datetime="formatDateISO(item.createdAt)">{{ formatDate(item.createdAt)
-                                    }}</time>
+                                }}</time>
                             </div>
                             <div class="flex items-center">
                                 <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
@@ -151,7 +151,7 @@ const getItemIcon = (item: DocItem) => {
                                         d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
                                 </svg>
                                 Updated <time :datetime="formatDateISO(item.updatedAt)">{{ formatDate(item.updatedAt)
-                                    }}</time>
+                                }}</time>
                             </div>
                         </div>
                     </div>

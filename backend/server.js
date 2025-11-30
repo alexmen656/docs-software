@@ -5,6 +5,7 @@ import cors from 'cors';
 import fs from 'fs/promises';
 import path from 'path';
 import dotenv from 'dotenv'
+import authRoutes from './routes/auth.js';
 
 dotenv.config();
 const app = express();
@@ -15,6 +16,9 @@ const __dirname = path.dirname(__filename);
 
 app.use(cors());
 app.use(bodyParser.json());
+
+//specific routes
+app.use('/api/auth', authRoutes);
 
 app.get('/api/health', (req, res) => {
     res.json({ status: 'OK' });
@@ -49,7 +53,6 @@ app.get('/api/products', (req, res) => {
         }
     });
 });
-
 
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
