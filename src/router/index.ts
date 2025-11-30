@@ -36,6 +36,18 @@ const router = createRouter({
       component: () => import('../views/DetailView.vue'),
       meta: { requiresGuest: true },
     },
+    {
+      path: '/admin',
+      name: 'admin-home',
+      component: () => import('../admin/views/HomeView.vue'),
+      meta: { requiresGuest: true },
+    },
+    {
+      path: '/admin/add/article',
+      name: 'admin-add-article',
+      component: () => import('../admin/views/AddArticle.vue'),
+      meta: { requiresGuest: true },
+    },
   ],
 })
 
