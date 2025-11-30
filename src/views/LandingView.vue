@@ -1,15 +1,40 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { products, demoDocuments } from '@/demo-data/docs'
-import type { Product } from '@/types'
+import type { Product, Doc } from '@/types'
 import { useTheme } from '@/composables/useTheme'
+import { productsService } from '@/services/productsService'
+import { docsService } from '@/services/docsService'
 
 const router = useRouter()
 useTheme().setCSSVariables("landing")
 
-const productList = ref<Product[]>(products)
+const productList = ref<Product[]>([])
+const docsList = ref<Doc[]>([])
 const searchQuery = ref('')
+const isLoading = ref(false)
+const error = ref<string | null>(null)
+
+const loadData = async () => {
+    isLoading.value = true
+    try {
+        const [products, docs] = await Promise.all([
+            productsService.getAllProducts(),
+            docsService.getAllDocs(),
+        ])
+        productList.value = products
+        docsList.value = docs
+    } catch (err) {
+        error.value = 'Failed to load data. Please try again later.'
+        console.error(err)
+    } finally {
+        isLoading.value = false
+    }
+}
+
+onMounted(() => {
+    loadData()
+})
 
 const filteredProducts = computed(() => {
     if (!searchQuery.value.trim()) return productList.value
@@ -25,7 +50,7 @@ const filteredDocs = computed(() => {
     if (!searchQuery.value.trim()) return []
 
     const query = searchQuery.value.toLowerCase()
-    return demoDocuments.filter(doc =>
+    return docsList.value.filter(doc =>
         doc.title.toLowerCase().includes(query) ||
         doc.description.toLowerCase().includes(query)
     )
@@ -41,6 +66,15 @@ const navigateToProduct = (slug: string) => {
 
 const navigateToDoc = (docId: string) => {
     router.push({ name: 'doc', params: { id: docId } })
+}
+
+const getProductDocCount = (productId: string) => {
+    return docsList.value.filter(doc => doc.productId === productId).length
+}
+
+const getProductSectionCount = (productId: string) => {
+    const count = getProductDocCount(productId)
+    return count > 0 ? Math.ceil(count / 3) : 0
 }
 </script>
 
@@ -65,7 +99,19 @@ const navigateToDoc = (docId: string) => {
             </div>
         </div>
         <div class="max-w-7xl mx-auto px-4 sm:px-8 py-8 sm:py-12">
-            <div v-if="hasSearchResults" class="mb-12">
+            <div v-if="error"
+                class="mb-6 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg">
+                <p class="text-red-700 dark:text-red-300">{{ error }}</p>
+            </div>
+            <div v-if="isLoading" class="flex justify-center items-center py-12">
+                <div class="animate-spin">
+                    <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+            </div>
+            <div v-else-if="hasSearchResults" class="mb-12">
                 <div v-if="filteredDocs.length > 0" class="mb-12">
                     <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6">Documentation</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -104,9 +150,8 @@ const navigateToDoc = (docId: string) => {
                             </p>
                             <div class="border-t border-gray-200 dark:border-gray-700 pt-4">
                                 <p class="text-sm text-gray-500 dark:text-gray-400">
-                                    {{demoDocuments.filter(d => d.productId === product.id).length}} Articles ·
-                                    {{demoDocuments.filter(d => d.productId === product.id).length > 0 ?
-                                        Math.ceil(demoDocuments.filter(d => d.productId === product.id).length / 3) : 0}}
+                                    {{getProductDocCount(product.id)}} Articles ·
+                                    {{getProductSectionCount(product.id)}}
                                     Sections
                                 </p>
                             </div>
@@ -135,9 +180,8 @@ const navigateToDoc = (docId: string) => {
                         </p>
                         <div class="border-t border-gray-200 dark:border-gray-700 pt-4">
                             <p class="text-sm text-gray-500 dark:text-gray-400">
-                                {{demoDocuments.filter(d => d.productId === product.id).length}} Articles ·
-                                {{demoDocuments.filter(d => d.productId === product.id).length > 0 ?
-                                    Math.ceil(demoDocuments.filter(d => d.productId === product.id).length / 3) : 0}}
+                                {{getProductDocCount(product.id)}} Articles ·
+                                {{getProductSectionCount(product.id)}}
                                 Sections
                             </p>
                         </div>

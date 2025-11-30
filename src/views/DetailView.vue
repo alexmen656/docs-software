@@ -1,5 +1,19 @@
 <template>
-    <div class="min-h-full bg-gray-50 dark:bg-slate-900 lg:pr-80">
+    <div v-if="isLoading" class="min-h-full bg-gray-50 dark:bg-slate-900 flex justify-center items-center">
+        <div class="animate-spin">
+            <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+        </div>
+    </div>
+    <div v-else-if="error" class="min-h-full bg-gray-50 dark:bg-slate-900 flex justify-center items-center">
+        <div class="text-center">
+            <p class="text-red-600 dark:text-red-400">{{ error }}</p>
+            <router-link to="/" class="mt-4 inline-block text-primary hover:underline">Back to home</router-link>
+        </div>
+    </div>
+    <div v-else class="min-h-full bg-gray-50 dark:bg-slate-900 lg:pr-80">
         <div class="max-w-4xl mx-auto px-4 sm:px-8 pt-4 sm:pt-6 pb-8 sm:pb-12">
             <div class="prose prose-sm dark:prose-invert max-w-none">
                 <div class="dark:border-gray-700 top-0 z-20">
@@ -310,10 +324,11 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref, onMounted } from 'vue'
 import { useRoute, RouterLink } from 'vue-router'
-import { demoDocuments } from '@/demo-data/docs'
 import { useTheme } from '@/composables/useTheme'
+import { docsService } from '@/services/docsService'
+import type { Doc } from '@/types'
 
 const route = useRoute()
 const docId = route.params.id as string
@@ -321,26 +336,48 @@ const { setCSSVariables } = useTheme()
 
 setCSSVariables()
 
-const docData = computed(() => {
-    return demoDocuments.find(doc => doc.id === docId)
+const docData = ref<Doc | undefined>()
+const allDocs = ref<Doc[]>([])
+const isLoading = ref(false)
+const error = ref<string | null>(null)
+
+const loadData = async () => {
+    isLoading.value = true
+    try {
+        const [doc, docs] = await Promise.all([
+            docsService.getDocById(docId),
+            docsService.getAllDocs(),
+        ])
+        docData.value = doc
+        allDocs.value = docs
+    } catch (err) {
+        error.value = 'Failed to load documentation. Please try again later.'
+        console.error(err)
+    } finally {
+        isLoading.value = false
+    }
+}
+
+onMounted(() => {
+    loadData()
 })
 
 const currentIndex = computed(() => {
-    return demoDocuments.findIndex(doc => doc.id === docId)
+    return allDocs.value.findIndex(doc => doc.id === docId)
 })
 
 const previousDoc = computed(() => {
     const index = currentIndex.value
     if (index > 0) {
-        return demoDocuments[index - 1]
+        return allDocs.value[index - 1]
     }
     return null
 })
 
 const nextDoc = computed(() => {
     const index = currentIndex.value
-    if (index < demoDocuments.length - 1) {
-        return demoDocuments[index + 1]
+    if (index < allDocs.value.length - 1) {
+        return allDocs.value[index + 1]
     }
     return null
 })

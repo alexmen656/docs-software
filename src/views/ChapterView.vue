@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRoute, useRouter, RouterLink } from 'vue-router'
-import { chapters, allDocItems } from '@/demo-data/docs'
 import { useTheme } from '@/composables/useTheme'
-import type { DocItem } from '@/types'
+import { docsService } from '@/services/docsService'
+import type { DocItem, Chapter } from '@/types'
 
 const route = useRoute()
 const router = useRouter()
@@ -12,13 +12,31 @@ const { setCSSVariables } = useTheme()
 setCSSVariables()
 
 const sortBy = ref<'name' | 'recent'>('recent')
-
 const chapterId = route.params.id as string
-const currentChapter = computed(() => chapters.find(c => c.id === chapterId))
+const currentChapter = ref<Chapter | undefined>()
+const chapterItems = ref<DocItem[]>([])
+const isLoading = ref(false)
+const error = ref<string | null>(null)
 
-const chapterItems = computed(() => {
-    if (!currentChapter.value) return []
-    return allDocItems.filter(item => item.parentId === chapterId)
+const loadData = async () => {
+    isLoading.value = true
+    try {
+        const chapter = await docsService.getChapterById(chapterId)
+        currentChapter.value = chapter
+        if (chapter) {
+            const items = await docsService.getDocsByChapterId(chapterId)
+            chapterItems.value = items
+        }
+    } catch (err) {
+        error.value = 'Failed to load chapter. Please try again later.'
+        console.error(err)
+    } finally {
+        isLoading.value = false
+    }
+}
+
+onMounted(() => {
+    loadData()
 })
 
 const sortedItems = computed(() => {
@@ -61,7 +79,21 @@ const getItemIcon = (item: DocItem) => {
 </script>
 
 <template>
-    <div v-if="currentChapter" class="min-h-full bg-gray-50 dark:bg-slate-900 lg:pr-80">
+    <div v-if="isLoading" class="min-h-full bg-gray-50 dark:bg-slate-900 flex justify-center items-center">
+        <div class="animate-spin">
+            <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+        </div>
+    </div>
+    <div v-else-if="error" class="min-h-full bg-gray-50 dark:bg-slate-900 flex justify-center items-center">
+        <div class="text-center">
+            <p class="text-red-600 dark:text-red-400">{{ error }}</p>
+            <router-link to="/" class="mt-4 inline-block text-primary hover:underline">Back to home</router-link>
+        </div>
+    </div>
+    <div v-else-if="currentChapter" class="min-h-full bg-gray-50 dark:bg-slate-900 lg:pr-80">
         <div class="max-w-4xl mx-auto px-4 sm:px-8 pt-4 sm:pt-6 pb-8 sm:pb-12">
             <div class="max-w-4xl mx-auto pt-4 pb-3">
                 <nav aria-label="Breadcrumb" class="mb-3">
@@ -113,7 +145,7 @@ const getItemIcon = (item: DocItem) => {
                                         clip-rule="evenodd" />
                                 </svg>
                                 Created <time :datetime="formatDateISO(item.createdAt)">{{ formatDate(item.createdAt)
-                                }}</time>
+                                    }}</time>
                             </div>
                             <div class="flex items-center">
                                 <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
@@ -121,7 +153,7 @@ const getItemIcon = (item: DocItem) => {
                                         d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
                                 </svg>
                                 Updated <time :datetime="formatDateISO(item.updatedAt)">{{ formatDate(item.updatedAt)
-                                }}</time>
+                                    }}</time>
                             </div>
                         </div>
                     </div>

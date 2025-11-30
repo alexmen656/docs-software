@@ -1,0 +1,44 @@
+[
+  {
+    "id": "shop",
+    "name": "Shop Management",
+    "description": "Verwaltung eines Online-Shops",
+    "logo": "/logo.png",
+    "slug": "shop"
+  },
+  {
+    "id": "website",
+    "name": "Website Management",
+    "description": "Verwaltung einer Website",
+    "logo": "/logo.png",
+    "slug": "website"
+  },
+  {
+    "id": "representative",
+    "name": "Digitale Vertretung",
+    "description": "Digitálne zastupiteľstvo",
+    "logo": "/logo.png",
+    "slug": "representative"
+  },
+  {
+    "id": "publishing",
+    "name": "Veröffentlichung",
+    "description": "Zverejňovanie",
+    "logo": "/logo.png",
+    "slug": "publishing"
+  },
+  {
+    "id": "analytics",
+    "name": "Analytik & Berichte",
+    "description": "Analytics and Reporting",
+    "logo": "/logo.png",
+    "slug": "analytics"
+  },
+  {
+    "id": "security",
+    "name": "Sicherheit",
+    "description": "Security & Compliance",
+    "logo": "/logo.png",
+    "slug": "security"
+  }
+]

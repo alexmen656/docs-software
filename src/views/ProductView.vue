@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useRoute, useRouter, RouterLink } from 'vue-router'
-import { products, allDocItems } from '@/demo-data/docs'
 import { useTheme } from '@/composables/useTheme'
-import type { DocItem } from '@/types'
+import { productsService } from '@/services/productsService'
+import { docsService } from '@/services/docsService'
+import type { DocItem, Product } from '@/types'
 
 const route = useRoute()
 const router = useRouter()
@@ -12,12 +13,30 @@ useTheme().setCSSVariables()
 
 const slug = route.params.slug as string
 const sortBy = ref<'name' | 'recent'>('recent')
-const currentProduct = computed(() => products.find(p => p.slug === slug))
+const currentProduct = ref<Product | undefined>()
+const productItems = ref<DocItem[]>([])
+const isLoading = ref(false)
+const error = ref<string | null>(null)
 
-const productItems = computed(() => {
-    const productId = currentProduct.value?.id
-    if (!productId) return []
-    return allDocItems.filter(item => item.productId === productId && !item.parentId)
+const loadData = async () => {
+    isLoading.value = true
+    try {
+        const product = await productsService.getProductBySlug(slug)
+        currentProduct.value = product
+        if (product) {
+            const items = await docsService.getDocsByProductId(product.id)
+            productItems.value = items
+        }
+    } catch (err) {
+        error.value = 'Failed to load product. Please try again later.'
+        console.error(err)
+    } finally {
+        isLoading.value = false
+    }
+}
+
+onMounted(() => {
+    loadData()
 })
 
 const sortedItems = computed(() => {
@@ -60,7 +79,21 @@ const getItemIcon = (item: DocItem) => {
 </script>
 
 <template>
-    <div v-if="currentProduct" class="min-h-full bg-gray-50 dark:bg-slate-900 lg:pr-80">
+    <div v-if="isLoading" class="min-h-full bg-gray-50 dark:bg-slate-900 flex justify-center items-center">
+        <div class="animate-spin">
+            <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+        </div>
+    </div>
+    <div v-else-if="error" class="min-h-full bg-gray-50 dark:bg-slate-900 flex justify-center items-center">
+        <div class="text-center">
+            <p class="text-red-600 dark:text-red-400">{{ error }}</p>
+            <router-link to="/" class="mt-4 inline-block text-primary hover:underline">Back to home</router-link>
+        </div>
+    </div>
+    <div v-else-if="currentProduct" class="min-h-full bg-gray-50 dark:bg-slate-900 lg:pr-80">
         <div class="max-w-4xl mx-auto px-4 sm:px-8 pt-4 sm:pt-6 pb-8 sm:pb-12">
             <div class="max-w-4xl mx-auto pt-4 pb-3">
                 <nav aria-label="Breadcrumb" class="mb-3">
@@ -90,7 +123,8 @@ const getItemIcon = (item: DocItem) => {
                                 :class="item.type === 'chapter' ? 'text-primary' : 'text-gray-500 dark:text-gray-400'"
                                 fill="currentColor" viewBox="0 0 20 20" aria-hidden="true" v-html="getItemIcon(item)">
                             </svg>
-                            <h2 class="text-xl font-semibold text-gray-900 dark:text-white text-primary-hover transition-colors">
+                            <h2
+                                class="text-xl font-semibold text-gray-900 dark:text-white text-primary-hover transition-colors">
                                 <a :href="item.type === 'chapter' ? '/chapter/' + item.id : '/doc/' + item.id"
                                     @click.prevent="navigateToItem(item)"
                                     class="stretched-link focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2">
@@ -108,14 +142,16 @@ const getItemIcon = (item: DocItem) => {
                                         d="M5.5 13a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.3A4.5 4.5 0 1113.5 13H11V9.413l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 001.414 1.414L9 9.414V13H5.5z"
                                         clip-rule="evenodd" />
                                 </svg>
-                                Created <time :datetime="formatDateISO(item.createdAt)">{{ formatDate(item.createdAt) }}</time>
+                                Created <time :datetime="formatDateISO(item.createdAt)">{{ formatDate(item.createdAt)
+                                    }}</time>
                             </div>
                             <div class="flex items-center">
                                 <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
                                     <path
                                         d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z" />
                                 </svg>
-                                Updated <time :datetime="formatDateISO(item.updatedAt)">{{ formatDate(item.updatedAt) }}</time>
+                                Updated <time :datetime="formatDateISO(item.updatedAt)">{{ formatDate(item.updatedAt)
+                                    }}</time>
                             </div>
                         </div>
                     </div>

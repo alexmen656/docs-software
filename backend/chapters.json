@@ -1,0 +1,29 @@
+[
+  {
+    "id": "shop-chapter-1",
+    "productId": "shop",
+    "title": "Erste Schritte",
+    "description": "Alles was Sie für den Start mit Ihrem Shop wissen müssen.",
+    "createdAt": "16.09.2024",
+    "updatedAt": "17.09.2024",
+    "type": "chapter"
+  },
+  {
+    "id": "shop-chapter-2",
+    "productId": "shop",
+    "title": "Fortgeschrittene Features",
+    "description": "Erweiterte Funktionen für erfahrene Shop-Betreiber.",
+    "createdAt": "16.09.2024",
+    "updatedAt": "19.11.2024",
+    "type": "chapter"
+  },
+  {
+    "id": "website-chapter-1",
+    "productId": "website",
+    "title": "Website Grundlagen",
+    "description": "Die Basics der Website-Erstellung und -Verwaltung.",
+    "createdAt": "16.08.2024",
+    "updatedAt": "14.09.2024",
+    "type": "chapter"
+  }
+]
