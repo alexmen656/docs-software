@@ -145,7 +145,6 @@ const updateDarkmode = () => {
 }
 
 updateDarkmode()
-
 const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
 darkModeMediaQuery.addEventListener('change', updateDarkmode)
 

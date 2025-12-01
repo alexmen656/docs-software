@@ -3,7 +3,7 @@
         <nav class="flex-1 overflow-y-auto" aria-label="Documentation navigation">
             <div class="px-4 py-4">
                 <h2 class="text-sm font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                    {{ currentProduct?.name || 'Documentation' }}
+                    ADMIN
                 </h2>
             </div>
             <ul class="px-2 space-y-1 list-none m-0 p-0">

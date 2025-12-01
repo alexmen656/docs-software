@@ -4,6 +4,8 @@ import { computed, onMounted } from 'vue'
 import AppHeader from './components/AppHeader.vue'
 import AppSidebar from './components/AppSidebar.vue'
 import AppFooter from './components/AppFooter.vue'
+import AdminSidebar from './admin/components/AdminSidebar.vue'
+import AdminHeader from './admin/components/AdminHeader.vue'
 import { useTheme } from './composables/useTheme'
 
 const route = useRoute()
@@ -13,20 +15,37 @@ onMounted(() => {
 })
 
 const showSidebar = computed(() => {
-  return !['landing', 'login', 'signup'].includes(route.name as string)
+  return !['landing', 'login', 'signup'].includes(route.name as string) ? route.meta.requiresAdmin !== true : false
+})
+
+const showAdminSidebar = computed(() => {
+  return !['landing', 'login', 'signup'].includes(route.name as string) ? route.meta.requiresAdmin === true : false
 })
 
 const showFooter = computed(() => {
   return ['landing', 'signup'].includes(route.name as string)
 })
+
+const showHeader = computed(() => {
+  return route.path.startsWith('/admin') ? false : true
+})
+
+const showAdminHeader = computed(() => {
+  return route.path.startsWith('/admin') ? true : false
+})
 </script>
 
 <template>
-  <div id="app" class="min-h-screen" :class="showSidebar ? 'app-with-sidebar' : 'bg-gray-50 dark:bg-gray-900'">
-    <AppHeader />
+  <div id="app" class="min-h-screen"
+    :class="showSidebar || showAdminSidebar ? 'app-with-sidebar' : 'bg-gray-50 dark:bg-gray-900'">
+    <!--{{ showHeader }}
+    {{ showAdminHeader }}-->
+    <AppHeader v-if="showHeader" />
+    <AdminHeader v-if="showAdminHeader" />
     <div class="flex h-full">
       <AppSidebar v-if="showSidebar" />
-      <main :class="showSidebar ? 'lg:ml-64 w-full main-content' : 'w-full p60'">
+      <AdminSidebar v-if="showAdminSidebar" />
+      <main :class="showSidebar || showAdminSidebar ? 'lg:ml-64 w-full main-content' : 'w-full p60'">
         <RouterView />
       </main>
     </div>
