@@ -203,7 +203,7 @@ const productItems = computed(() => {
 })
 
 const topLevelChapters = computed(() => productItems.value.filter(item => item.type === 'chapter'))
-const topLevelArticles = computed(() => productItems.value.filter(item => item.type === 'article'))
+const topLevelArticles = computed(() => [{ id: 1, icon: "", title: "Manage Users" }, { id: 2, icon: "", title: "Manage Products" }])
 
 const toggleChapter = (chapterId: string) => {
     const index = expandedChapters.value.indexOf(chapterId)

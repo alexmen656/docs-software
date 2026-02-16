@@ -8,7 +8,7 @@
                         <img class="logo-image"
                             :src="darkmode ? '/src/assets/logo-syscom-dark.svg' : '/src/assets/logo-syscom.svg'"
                             alt="Logo of SysCom" />
-                            Admin
+                        Admin
                     </div>
                 </div>
                 <div v-if="showSearch" class="hidden md:flex flex-1 max-w-2xl mx-8">
@@ -20,12 +20,12 @@
                                 d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.452 4.391l3.328 3.329a.75.75 0 11-1.06 1.06l-3.329-3.328A7 7 0 012 9z"
                                 clip-rule="evenodd" />
                         </svg>
-                        <input id="header-search" type="text" placeholder="Search the docs..."
+                        <input id="header-search" type="text" placeholder="Search ADMIN..."
                             class="w-full pl-10 pr-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400" />
                     </div>
                 </div>
                 <div class="flex items-center space-x-2 sm:space-x-4">
-                    <div class="relative hidden md:block" ref="languageDropdownRef">
+                    <!---<div class="relative hidden md:block" ref="languageDropdownRef">
                         <button @click="toggleLanguageMenu" @keydown="handleButtonKeydown" aria-haspopup="menu"
                             :aria-expanded="isLanguageMenuOpen" aria-controls="language-menu"
                             :aria-label="currentLanguage.ariaLabel"
@@ -55,7 +55,7 @@
                                 </button>
                             </li>
                         </ul>
-                    </div>
+                    </div>-->
                     <button aria-label="Toggle theme" class="hidden sm:block">
                         <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"
                             class="toggleIcon_g3eP lightToggleIcon_pyhR">
@@ -167,14 +167,14 @@ const isHeaderMenuOpen = ref(false)
 const languageDropdownRef = ref<HTMLElement | null>(null)
 const menuItemRefs = ref<HTMLButtonElement[]>([])
 
-const toggleLanguageMenu = () => {
+/*const toggleLanguageMenu = () => {
     isLanguageMenuOpen.value = !isLanguageMenuOpen.value
     if (isLanguageMenuOpen.value) {
         nextTick(() => {
             menuItemRefs.value[0]?.focus()
         })
     }
-}
+}*/
 
 const toggleHeaderMenu = () => {
     isHeaderMenuOpen.value = !isHeaderMenuOpen.value
@@ -190,7 +190,7 @@ const selectLanguage = (lang: Language) => {
     document.documentElement.lang = lang.code
 }
 
-const handleButtonKeydown = (e: KeyboardEvent) => {
+/*const handleButtonKeydown = (e: KeyboardEvent) => {
     if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
         e.preventDefault()
         isLanguageMenuOpen.value = true
@@ -245,7 +245,7 @@ const handleMenuItemKeydown = (e: KeyboardEvent, index: number) => {
             if (lang) selectLanguage(lang)
             break
     }
-}
+}*/
 
 const handleClickOutside = (e: MouseEvent) => {
     if (languageDropdownRef.value && !languageDropdownRef.value.contains(e.target as Node)) {
