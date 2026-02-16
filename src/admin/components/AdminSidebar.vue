@@ -54,7 +54,7 @@
                     </div>
                 </li>
                 <li v-for="article in topLevelArticles" :key="article.id">
-                    <button @click="navigateToItem(article)"
+                    <button @click="navigateToAdmin(article.id)"
                         class="w-full flex items-center gap-2 px-4 py-2 text-left text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 hover:underline dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors">
                         <svg class="w-4 h-4 flex-shrink-0 text-gray-400" fill="currentColor" viewBox="0 0 20 20"
                             aria-hidden="true">
@@ -126,7 +126,7 @@
                     </div>
                 </li>
                 <li v-for="article in topLevelArticles" :key="article.id">
-                    <button @click="navigateToItem(article); closeMobileMenu()"
+                    <button @click="navigateToAdmin(article.id); closeMobileMenu()"
                         class="w-full flex items-center gap-2 px-4 py-2 text-left text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 hover:underline dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 rounded transition-colors">
                         <svg class="w-4 h-4 flex-shrink-0 text-gray-400" fill="currentColor" viewBox="0 0 20 20"
                             aria-hidden="true">
@@ -203,7 +203,10 @@ const productItems = computed(() => {
 })
 
 const topLevelChapters = computed(() => productItems.value.filter(item => item.type === 'chapter'))
-const topLevelArticles = computed(() => [{ id: 1, icon: "", title: "Manage Users" }, { id: 2, icon: "", title: "Manage Products" }])
+const topLevelArticles = computed(() => [
+    { id: 'manage-users', title: "Manage Users" },
+    { id: 'manage-products', title: "Manage Products" }
+])
 
 const toggleChapter = (chapterId: string) => {
     const index = expandedChapters.value.indexOf(chapterId)
@@ -223,6 +226,14 @@ const navigateToItem = (item: DocItem) => {
         router.push({ name: 'chapter', params: { id: item.id } })
     } else {
         router.push({ name: 'doc', params: { id: item.id } })
+    }
+}
+
+const navigateToAdmin = (itemId: string) => {
+    if (itemId === 'manage-users') {
+        router.push({ name: 'admin-users' })
+    } else if (itemId === 'manage-products') {
+        router.push({ name: 'admin-products' })
     }
 }
 </script>
